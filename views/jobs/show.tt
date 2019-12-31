@@ -1,0 +1,273 @@
+[% 
+  resource = 'job'
+  nameAttr = 'name'
+
+  title    = resource.ucfirst _ " ( " _ ${resource}.${nameAttr} _ " )"
+%]
+<div class="content">
+
+  [%  INCLUDE layouts/common/header.tt %]
+
+  <div class="container">
+    <div class="row">
+      [%  INCLUDE _flash.tt %]
+                    
+      <div class="btn-toolbar">
+          [% IF role == 'Admin' %]
+          <a href="/jobs/[% job.id %]/edit" class="btn btn-primary"><i class="fa fa-edit"></i> Edit</a>
+          <a href="#myModal" data-toggle="modal" class="btn btn-default"><i class="fa fa-trash-o"></i> Delete</a>
+          <a href="/jobs/[% job.id %]/run" class="btn btn-default"><i class="fa fa-play"></i> Execute</a>
+          [% END %]
+          <a href="[% request.uri_for("/jobs")%]" class="btn btn-default"><i class="fa fa-list-alt"></i> List</a>
+          <a href="/jobs/[% job.id %]/status" class="btn btn-default"><i class="fa fa-list-alt"></i> View Executions</a>
+      </div>
+
+      <div class="well">
+
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#job" data-toggle="tab">Job</a></li>
+          <li><a href="#action" data-toggle="tab">[% action_type.name %]</a></li>
+          <li><a href="#trigger" data-toggle="tab">Trigger</a></li>
+          <li><a href="#preactions" data-toggle="tab">Pre Actions <span class="badge">[% pre_actions.size %]</span></a></li>
+          <li><a href="#postactions" data-toggle="tab">Post Actions <span class="badge">[% post_actions.size %]</span></a></li>
+          <li><a href="#owner" data-toggle="tab">Owner</a></li>
+          <li><a href="#alarm" data-toggle="tab">Alarm To <span class="badge">[% alarm_contacts.size %]</span></a></li>
+        </ul>
+
+        <div id="myTabContent" class="tab-content">
+          <div class="tab-pane active in" id="job">
+            <table class="table table-hover">
+              <tbody>
+                <tr>
+                  <th style="width: 15%">ID</th>
+                  <td>[% job.id %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Name</th>
+                  <td>[% job.name %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Group</th>
+                  <td>[% group %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Alarm if Fail</th>
+                  <td>[% IF job.alarm_if_fail == 1 %]Yes[% ELSE %]No[% END %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Alarm if Success</th>
+                  <td>[% IF job.alarm_if_success == 1 %]Yes[% ELSE %]No[% END %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Active</th>
+                  <td>[% IF job.active == 1 %]Yes[% ELSE %]No[% END %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Description</th>
+                  <td>[% job.description %]</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>    
+          <div class="tab-pane fade" id="action">
+            <table class="table table-hover">
+              <tbody>
+                <tr>      
+                  <th style="width: 15%">ID</th>
+                  <td>[% action.id %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Name</th>
+                  <td>[% action.name %]</td>
+                </tr>
+                [% IF action_type.name == 'Filetransfer' %]            
+                <tr>
+                  <th style="width: 15%">Source</th>
+                  <td>[% action.source.name %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Target</th>
+                  <td>[% action.target.name %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Protocol</th>
+                  <td>[% action.protocol.name %]</td>
+                </tr>
+                [% ELSIF action_type.name == 'Command' %]
+                <tr>
+                  <th style="width: 15%">Command</th>
+                  <td>[% action.command.name %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Parameters</th>
+                  <td>[% action.parameters %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">System</th>
+                  <td>[% IF action.system == 1 %]Yes[% ELSE %]No[% END %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Type</th>
+                  <td>[% action.type.name %]</td>
+                </tr>
+                [% ELSE %]
+                Unknown Action type
+                [% END %]          
+                <tr>
+                  <th style="width: 15%">Description</th>
+                  <td>[% action.description %]</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="trigger">
+            <table class="table table-hover">
+              <tbody>
+                <tr>      
+                  <th style="width: 15%">Type</th>
+                  <td>[% trigger_type.name %]</td>
+                  [% IF trigger_type.name == 'Schedule' %]
+                </tr>
+                <tr>
+                  <th style="width: 15%">Name</th>
+                  <td>[% trigger.name %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Start Minutes</th>
+                  <td>[% IF trigger.start_mins %][% trigger.start_mins %][% ELSE %]All[% END %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Start Times</th>
+                  <td>[% IF trigger.start_times %][% trigger.start_times %][% ELSE %]All[% END %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Start Week Days</th>
+                  <td>[% IF trigger.start_week_days %][% trigger.start_week_days %][% ELSE %]All[% END %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Start Month Days</th>
+                  <td>[% IF trigger.start_month_days %][% trigger.start_month_days %][% ELSE %]All[% END %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Start Month</th>
+                  <td>[% IF trigger.start_month %][% trigger.start_month %][% ELSE %]All[% END %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Description</th>
+                  <td>[% trigger.description %]</td>
+                </tr>
+                [% ELSIF trigger_type.name == 'Filewatcher' %]
+                <tr>
+                  <th style="width: 15%">Name</th>
+                  <td>[% trigger.name %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Watching to</th>
+                  <td>[% trigger.container %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Schedule</th>
+                  <td>[% trigger.schedule %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Description</th>
+                  <td>[% trigger.description %]</td>
+                </tr>
+                [% ELSIF trigger_type.name == 'Condition' %]
+                <tr>
+                  <th style="width: 15%">Name</th>
+                  <td>[% trigger.name %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Status</th>
+                  <td><span class="label [% IF jobinstance.status == 'FAILURE' %]label-danger[% ELSIF jobinstance.status == 'SUCCESS' %]label-success[% ELSIF jobinstance.status == 'RUNNING' %]label-info[% ELSE %] [% END %]">[% trigger.status %]</span></td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Job</th>
+                  <td>[% trigger.job %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Schedule</th>
+                  <td>[% trigger.schedule %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Description</th>
+                  <td>[% trigger.description %]</td>
+                </tr>
+                [% ELSE %]
+                Unknown Trigger type
+                [% END %]
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="preactions">
+            <ul class="nav nav-list">     
+              [% FOREACH pre_action IN pre_actions %]  
+                [% IF pre_action.command.system == 1 %]
+                <li><a href="/commands/[% pre_action.command.id %]">[% pre_action.command.name %]</a></li>
+                [% ELSE %]
+                <li><a href="/commands/[% pre_action.command.id %]">[% pre_action.command.name %] ([% pre_action.command.file %] [% pre_action.command.parameters %])</a></li>
+                [% END %]
+              [% END %]
+            </ul>
+          </div>      
+          <div class="tab-pane fade" id="postactions">
+            <ul class="nav nav-list">     
+              [% FOREACH post_action IN post_actions %]  
+                [% IF post_action.command.system == 1 %]
+                <li><a href="/commands/[% post_action.command.id %]">[% post_action.command.name %]</a></li>
+                [% ELSE %]
+                <li><a href="/commands/[% post_action.command.id %]">[% post_action.command.name %] ([% post_action.command.file %] [% post_action.command.parameters %])</a></li>
+                [% END %]
+              [% END %]
+            </ul>
+          </div>      
+          <div class="tab-pane fade" id="owner">
+            <table class="table table-hover">
+              <tbody>
+                <tr>      
+                  <th style="width: 15%">ID</th>
+                  <td>[% contact.id %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Name</th>
+                  <td>[% contact.firstname %] [% contact.lastname %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Corp ID</th>
+                  <td>[% contact.corpid %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Email</th>
+                  <td>[% contact.email %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Team</th>
+                  <td>[% team.name %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Team Email</th>
+                  <td>[% team.email %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Team Description</th>
+                  <td>[% team.description %]</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="alarm">
+            <ul class="nav nav-list">  
+              [% FOREACH alarm_contact IN alarm_contacts %]      
+              <li><a href="/contacts/[% alarm_contact.id %]">[% alarm_contact.firstname %] [% alarm_contact.lastname %] ([% alarm_contact.email %])</a></li>
+              [% END %]
+            </ul>
+          </div>      
+        </div>
+      </div>
+
+      [% INCLUDE _delete_modal.tt action="/jobs/${job.id}/delete" %]
+
+    </div>
+  </div>
+</div>

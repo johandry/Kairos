@@ -1,0 +1,104 @@
+[% 
+  resource = 'contact'
+  nameAttr = ''
+
+  title    = resource.ucfirst _ " ( ${contact.firstname} ${contact.lastname} )"
+%]
+<div class="content">
+
+  [%  INCLUDE layouts/common/header.tt %]
+
+  <div class="container">
+    <div class="row">
+      [%  INCLUDE _flash.tt %]
+
+    <div class="btn-toolbar">
+        [% IF role == 'Admin' %]
+        <a href="/contacts/[% contact.id %]/edit" class="btn btn-primary"><i class="fa fa-edit"></i> Edit</a>
+        <a href="#myModal" data-toggle="modal" class="btn btn-default [% IF jobs.size or credentials.size %]btn-danger[% END %]"><i class="fa fa-trash-o"></i> Delete</a>
+        [% END %]
+        <a href="[% request.uri_for("/contacts")%]" class="btn btn-default"><i class="fa fa-list-alt"></i> List</a>
+    </div>
+
+      <div class="well">
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#contact" data-toggle="tab">Contact</a></li>
+          <li><a href="#team" data-toggle="tab">Team</a></li>
+          <li><a href="#credentials" data-toggle="tab">Credentials  <span class="badge [% IF credentials.size %]alert-danger[% END %]">[% credentials.size %]</span></a></li>
+          <li><a href="#jobs" data-toggle="tab">Jobs  <span class="badge  [% IF jobs.size %]alert-danger[% END %]">[% jobs.size %]</span></a></li>
+        </ul>
+
+        <div id="myTabContent" class="tab-content">
+          <div class="tab-pane active in" id="contact">
+            <table class="table table-hover">
+              <tbody>
+                <tr>
+                  <th style="width: 15%">ID</th>
+                  <td>[% contact.id %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">doxTG Username</th>
+                  <td>[% username %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Corp ID</th>
+                  <td>[% contact.id %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Name</th>
+                  <td>[% contact.firstname %] [% contact.lastname %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Email</th>
+                  <td>[% contact.email %]</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="tab-pane fade" id="team">
+            <table class="table table-hover">
+              <tbody>
+                <tr>
+                  <th style="width: 15%">ID</th>
+                  <td>[% team.id %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Name</th>
+                  <td>[% team.name %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Email</th>
+                  <td>[% team.email %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Description</th>
+                  <td>[% team.description %]</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="tab-pane fade" id="credentials">
+            <ul class="nav nav-list">
+              [% FOREACH credential IN credentials %]  
+                <li><a href="/credentials/[% credential.id %]">[% credential.username %]</a></li> 
+              [% END %]
+            </ul>
+          </div>
+
+          <div class="tab-pane fade" id="jobs">
+            <ul class="nav nav-list">   
+              [% FOREACH job IN jobs %]   
+                <li><a href="/jobs/[% job.id %]">[% job.name %]</a></li> 
+              [% END %]
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      [% INCLUDE _delete_modal.tt action="/contacts/${contact.id}/delete" %]
+                
+    </div>
+  </div>
+</div>

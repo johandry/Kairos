@@ -1,0 +1,5 @@
+<input type="hidden" name="id" id="id" value="[% jobgroup.id %]">
+<label>Name</label>
+<input type="text" name="email" id="email" value="[% jobgroup.email %]" class="input-xlarge">
+<label>Description</label>
+<textarea name="description" value="[% jobgroup.description %]" rows="3" class="input-xlarge">[% jobgroup.description %]</textarea>

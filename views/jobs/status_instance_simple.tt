@@ -1,0 +1,16 @@
+<dl class="dl-horizontal">
+  <dt>ID</dt><dd>[% jobinstance.id %]</dd>
+  <dt>Job</dt><dd>[% jobinstance.job %]</dd>
+  <dt>Start Time</dt><dd>[% jobinstance.start_on %]</dd>
+  <dt>Status</dt><dd><span class="label [% IF jobinstance.status == 'FAILURE' %]label-danger[% ELSIF jobinstance.status == 'SUCCESS' %]label-success[% ELSIF jobinstance.status == 'RUNNING' %]label-info[% ELSE %] [% END %]">[% jobinstance.status %]</span>&nbsp;</dd>
+  <dt>End Time</dt><dd [% IF jobinstance.end_on %]id="end_on"[% END %]>[% jobinstance.end_on %]&nbsp;</dd>
+  <dt>Exit Code</dt><dd>[% jobinstance.exit_code %]&nbsp;</dd>
+  <dt>Results</dt>
+  <dd>
+  <ol>
+  [% FOR line IN jobinstance.results %]
+    <li>[% line %]</li>
+  [% END %]
+  </ol>
+  </dd>
+</dl>

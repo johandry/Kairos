@@ -1,0 +1,50 @@
+[% 
+  resource = 'job'
+  nameAttr = 'name'
+
+  title    = "Job Execution (# ${jobinstance.id})"
+%]
+<div class="content">
+
+  [%  INCLUDE layouts/common/header.tt %]
+
+  <div class="container">
+    <div class="row">
+      [%  INCLUDE _flash.tt %]
+                    
+<div class="btn-toolbar">
+    <a href="/jobs/[% jobinstance.job_id %]" class="btn btn-primary"><i class="fa fa-wrench"></i> View Job</a>
+    [% IF role == 'Admin' %]
+    <a href="/jobs/[% jobinstance.job_id %]/run" class="btn btn-default"><i class="fa fa-play"></i> Execute Job</a>
+    [% END %]
+    <a href="/jobs/[% jobinstance.job_id %]/status" class="btn btn-default"><i class="fa fa-list-alt"></i> View Executions</a>
+  <div class="btn-group">
+  </div>
+</div>
+  <div class="well">
+    <div id="myTabContent" class="tab-content">
+      <div class="tab-pane active in" id="jobinstance">
+
+      </div>
+  </div>
+
+</div>
+
+<script>
+ $(document).ready(function() {
+   $("#jobinstance").load('/jobinstance/[% jobinstance.id %]/status?simple=1');
+   var refreshId = setInterval(function() {
+      var end_on = $( '#end_on' );
+      $("#jobinstance").load('/jobinstance/[% jobinstance.id %]/status?simple=1');
+      if ( end_on.text() != '' ) {
+        clearInterval( refreshId );
+      }
+   }, 1000);
+   $.ajaxSetup({ cache: false });
+});
+</script>
+
+                
+        </div>
+    </div>
+</div>

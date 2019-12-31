@@ -1,0 +1,6 @@
+
+BEGIN;
+
+DROP   DATABASE IF EXISTS     ftg;
+
+COMMIT;

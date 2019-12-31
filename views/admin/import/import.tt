@@ -1,0 +1,39 @@
+[%  INCLUDE admin/import/_header.tt 
+    title = "Import"
+%]
+[% IF role == 'Admin' %]                    
+<div class="btn-toolbar">
+  <form id="importform" method="post" action="/import">
+    <input id="file" name="file" type="file" style="display:none">
+    <div class="input-append">
+      <input id="filename" class="input-large" type="text">
+      <a class="btn" onclick="$('input[id=file]').click();"><i class="fa fa-search"></i> Browse</a>
+
+      <button id="load" type="submit" class="btn"><i class="fa fa-cloud-upload"></i> Load</button>
+      <!-- <a class="btn" href="[% request.uri_for("/load",file => "test.jil" ) %]"><i class="fa fa-cloud-upload"></i> Load</a> -->
+      [% IF source %]
+      <!-- <button id="import" type="submit" class="btn"><i class="fa fa-download-alt"></i> Import</button> -->
+      <a class="btn" href="[% request.uri_for("/import")%]/[% file %]"><i class="fa fa-download-alt"></i> Import</a>
+      [% END %]
+    </div>
+
+    <div class="btn-group">
+    </div>
+    <script type="text/javascript">
+    $('input[id=file]').change(function() {
+    $('#filename').val($(this).val().substring($(this).val().lastIndexOf('\\')+1,$(this).val().length));
+    });
+    </script>
+  </form>
+</div>
+[% IF source %]
+<pre>
+[% source %]
+</pre>
+[% END %]
+[% END %]
+
+                
+        </div>
+    </div>
+</div>

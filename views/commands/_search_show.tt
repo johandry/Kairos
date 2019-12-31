@@ -1,0 +1,22 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Parameters</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    [% FOR command IN results.commands # .slice( pager.first - 1, pager.last - 1) %]
+    <tr>
+      <td>[% command.id %]</td>
+      <td><a href="commands/[% command.id %]">[% command.name.replace("((?i)$query)", '<b>$1</b>') %]</a></td>
+      <td>[% command.parameters.replace("((?i)$query)", '<b>$1</b>') %]</td>
+      <td>[% command.description.replace("((?i)$query)", '<b>$1</b>') %]</td>
+    </tr>
+    [% END %]
+  </tbody>
+</table>
+
+[% # INCLUDE _pagination.tt %]

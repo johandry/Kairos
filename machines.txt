@@ -1,0 +1,42 @@
+define host{
+        use                     linux-server
+        host_name               ftgss02
+        alias                   YP doxTG Remote Machine
+        address                 
+        }
+
+define host{
+        use                     linux-server
+        host_name               ftp1
+        alias                   YP doxTG Remote Machine
+        address                 
+        }
+
+define host{
+        use                     linux-server
+        host_name               64.29.145.9
+        alias                   YP doxTG Remote Machine
+        address                 
+        }
+
+define host{
+        use                     linux-server
+        host_name               cph
+        alias                   YP doxTG Remote Machine
+        address                 
+        }
+
+define host{
+        use                     linux-server
+        host_name               www.ddai.com
+        alias                   YP doxTG Remote Machine
+        address                 
+        }
+
+define host{
+        use                     linux-server
+        host_name               attftp
+        alias                   YP doxTG Remote Machine
+        address                 
+        }
+

@@ -1,0 +1,20 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    [% FOR container IN results.containers # .slice( pager.first - 1, pager.last - 1) %]
+    <tr>
+      <td>[% container.id %]</td>
+      <td><a href="containers/[% container.id %]">[% container.name.replace("((?i)$query)", '<b>$1</b>') %]</a></td>
+      <td>[% container.description.replace("((?i)$query)", '<b>$1</b>') %]</td>
+    </tr>
+    [% END %]
+  </tbody>
+</table>
+
+[% # INCLUDE _pagination.tt %]

@@ -1,0 +1,25 @@
+<input type="hidden" name="id" id="id" value="[% condition.id %]">
+<label>Status</label>
+<select name="status_id" id="status_id" class="input-xlarge">
+  <option value="0">-- Select a Status --</option>\
+  [% FOREACH status IN statuses %]
+  <option value="[% status.id %]" [% IF status.id == condition.status_id %]selected[% END %]>[% status.name %] [[% status.shortname %]]</option>
+  [% END %]
+</select>
+<label>Job</label>
+<select name="job_id" id="job_id" class="input-xlarge">
+  <option value="0">-- Select a Job --</option>\
+  [% FOREACH job IN jobs %]
+  <option value="[% job.id %]" [% IF job.id == condition.job_id %]selected[% END %]>[% job.name %]</option>
+  [% END %]
+</select>
+<label>Schedule</label>
+<select name="schedule_id" id="schedule_id" class="input-xlarge">
+  <option value="0">-- Select a Schedule --</option>\
+  [% FOREACH schedule IN schedules %]
+  <option value="[% schedule.id %]" [% IF schedule.id == condition.schedule_id %]selected[% END %]>[% schedule.name %]</option>
+  [% END %]
+</select>
+<em>- OR -</em> <a href="/schedules/new" class="btn">Create a Schedule</a> 
+<label>Description</label>
+<textarea name="description" value="[% condition.description %]" rows="3" class="input-xlarge">[% condition.description %]</textarea>

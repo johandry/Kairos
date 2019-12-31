@@ -1,0 +1,60 @@
+<div class="container">    
+  <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+    <div class="panel panel-info" >
+      <div class="panel-heading">
+        <div class="panel-title">Sign In</div>
+        <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="reset-password">Forgot password?</a></div>
+      </div>     
+
+      <div style="padding-top:30px" class="panel-body" >
+
+        
+        [% IF show_warning %]
+        <div id="login-alert" class="alert alert-error col-sm-12">
+        <button type="button" class="close" data-dismiss="alert">&times;</button> 
+        [% show_warning %]
+        </div>
+        [% END %]
+                    
+        <form id="loginform" class="form-horizontal" role="form" method="post" action="[% request.uri_base %]/login">   
+          <input type="hidden" name="path" id="path" value="[% path %]">       
+          <div style="margin-bottom: 25px" class="input-group">
+              <span class="input-group-addon"><i class="fa fa-user"></i></span>
+              <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="Username" required autofocus>                                        
+          </div>
+              
+          <div style="margin-bottom: 25px" class="input-group">
+              <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+              <input id="login-password" type="password" class="form-control" name="password" placeholder="Password" required>
+          </div>
+
+          <div class="input-group">
+            <div class="checkbox">
+              <label>
+                <input id="login-remember" type="checkbox" name="remember-me" value="1"> Remember me
+              </label>
+            </div>
+          </div>
+
+          <div style="margin-top:10px" class="form-group">
+            <!-- Button -->
+            <div class="col-sm-12 controls">
+              <button type="submit" class="btn btn-primary">Sign in</button>
+            </div> 
+          </div>
+
+          <div class="form-group">
+            <div class="col-md-12 control">
+              <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
+                Don't have an account! 
+                <a href="mailto:unixdo@yp.com?subject=Request Access to YP doxTG&body=UNIXDO Team,%0D%0A%0D%0APlease, can you grant me access to YP doxTG?%0D%0A%0D%0AThe information required is:%0D%0A    Corp ID: %0D%0A    Email: %0D%0A    Team: %0D%0A%0D%0AThanks,">
+                    Email Request Here
+                </a>
+              </div>
+            </div>
+          </div>    
+        </form> 
+      </div>    
+    </div>                     
+  </div>  
+</div>

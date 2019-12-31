@@ -1,0 +1,67 @@
+<div class="content">
+    
+    <div class="header">
+        
+        <h1 class="page-title">Conditions</h1>
+    </div>
+    
+    <ul class="breadcrumb">
+        <li><a href="/">Home</a> </li>
+        <li class="active">Conditions</li>
+    </ul>
+
+    <div class="container">
+        <div class="row">
+          [%  INCLUDE _flash.tt %] 
+          [% IF role == 'Admin' %]
+          <div class="btn-toolbar">
+            <div class="btn-group">
+              <a href="[% request.uri_for("/conditions/new")%]" class="btn btn-primary"><i class="fa fa-plus"></i> New Condition</a>
+            </div>
+            <div class="btn-group">
+              <button class="btn btn-default"><i class="fa fa-cloud-upload"></i> Import</button>
+              <button class="btn btn-default"><i class="fa fa-cloud-download"></i> Export</button>
+            </div>
+          </div>
+          [% END %]
+          <div class="well">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Job</th>
+                    <th>Schedule</th>
+                    <th>Description</th>
+                    <th style="width: 26px;"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  [% FOR condition IN conditions.slice( pager.first - 1, pager.last - 1) %]
+                  <tr>
+                    <td>[% condition.id %]</td>
+                    <td><a href="conditions/[% condition.id %]">[% condition.name %]</a></td>
+                    <td><span class="label [% IF jobinstance.status == 'FAILURE' %]label-danger[% ELSIF jobinstance.status == 'SUCCESS' %]label-success[% ELSIF jobinstance.status == 'RUNNING' %]label-info[% ELSE %] [% END %]">[% condition.status %]</span></td>
+                    <td>[% condition.job %]</td>
+                    <td>[% condition.schedule %]</td>
+                    <td>[% condition.description %]</td>
+                    <td>
+                      [% IF role == 'Admin' %]
+                        <a href="conditions/[% condition.id %]/edit"><i class="fa fa-pencil"></i></a>
+                        <a href="#myModal" role="button" data-toggle="modal"><i class="fa fa-remove"></i></a>
+                      [% END %]
+                    </td>
+                  </tr>
+                  [% END %]                
+                </tbody>
+              </table>
+          </div>
+          [% INCLUDE _pagination.tt %]
+          [% INCLUDE _delete_modal.tt action="/conditions/${condition.id}/delete" %]
+
+          
+                
+        </div>
+    </div>
+</div>

@@ -1,0 +1,149 @@
+[% 
+  resource = 'container'
+  nameAttr = 'name'
+
+  title    = resource.ucfirst _ " ( " _ ${resource}.${nameAttr} _ " )"
+%]
+<div class="content">
+
+  [%  INCLUDE layouts/common/header.tt %]
+
+  <div class="container">
+    <div class="row">
+      [%  INCLUDE _flash.tt %]
+                    
+      <div class="btn-toolbar">
+          [% IF role == 'Admin' %]
+          <a href="/containers/[% container.id %]/edit" class="btn btn-primary"><i class="fa fa-edit"></i> Edit</a>
+          <a href="#myModal" data-toggle="modal" class="btn btn-default [% IF filetransfers.size %]btn-danger[% END %]"><i class="fa fa-trash-o"></i> Delete</a>
+          [% END %]
+          <a href="[% request.uri_for("/containers")%]" class="btn btn-default"><i class="fa fa-list-alt"></i> List</a>
+      </div>
+
+      <div class="well">
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#container" data-toggle="tab">Container</a></li>
+          <li><a href="#credential" data-toggle="tab">Credential</a></li>
+          <li><a href="#machine" data-toggle="tab">Machine</a></li>
+          <li><a href="#file" data-toggle="tab">File</a></li>
+          <li><a href="#filetransfers" data-toggle="tab">File Transfers  <span class="badge [% IF filetransfers.size %]alert-danger[% END %]">[% filetransfers.size %]</span></a></li>
+          <li><a href="#commands" data-toggle="tab">Commands  <span class="badge [% IF commands.size %]alert-danger[% END %]">[% commands.size %]</span></a></li>
+        </ul>
+
+        <div id="myTabContent" class="tab-content">
+          <div class="tab-pane active in" id="container">
+            <table class="table table-hover">
+              <tbody>
+                <tr>
+                  <th style="width: 15%">ID</th>
+                  <td>[% container.id %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Name</th>
+                  <td>[% container.name %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Description</th>
+                  <td>[% container.description %]</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="tab-pane fade" id="credential">
+            <table class="table table-hover">
+              <tbody>
+                <tr>
+                  <th style="width: 15%">ID</th>
+                  <td>[% credential.id %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Username</th>
+                  <td>[% credential.username %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Assigned to</th>
+                  <td>[% credential.contact_name %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Description</th>
+                  <td>[% credential.description %]</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="tab-pane fade" id="machine">
+            <table class="table table-hover">
+              <tbody>
+                <tr>
+                  <th style="width: 15%">ID</th>
+                  <td>[% machine.id %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Hostname</th>
+                  <td>[% machine.hostname %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Domain</th>
+                  <td>[% machine.domainname %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">IP</th>
+                  <td>[% machine.ip %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Data Center</th>
+                  <td>[% machine.dc_name %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Description</th>
+                  <td>[% machine.description %]</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="tab-pane fade" id="file">
+            <table class="table table-hover">
+              <tbody>
+                <tr>
+                  <th style="width: 15%">ID</th>
+                  <td>[% file.id %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Name</th>
+                  <td>[% file.name %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Description</th>
+                  <td>[% file.description %]</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>   
+
+          <div class="tab-pane fade" id="filetransfers">
+            <ul class="nav nav-list">   
+              [% FOREACH filetransfer IN filetransfers %]   
+                <li><a href="/filetransfers/[% filetransfer.id %]">[% filetransfer.name %]</a></li> 
+              [% END %]
+            </ul>
+          </div>
+
+          <div class="tab-pane fade" id="commands">
+            <ul class="nav nav-list">   
+              [% FOREACH command IN commands %]   
+                <li><a href="/commands/[% command.id %]">[% command.name %]</a></li> 
+              [% END %]
+            </ul>
+          </div>      
+        </div>
+
+      </div>
+
+      [% INCLUDE _delete_modal.tt action="/containers/${container.id}/delete" %]
+  
+    </div>
+  </div>
+</div>

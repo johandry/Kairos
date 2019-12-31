@@ -1,0 +1,20 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Address</th>
+    </tr>
+  </thead>
+  <tbody>
+    [% FOR datacenter IN results.datacenters # .slice( pager.first - 1, pager.last - 1) %]
+    <tr>
+      <td>[% datacenter.id %]</td>
+      <td>[% datacenter.name.replace("((?i)$query)", '<b>$1</b>') %]</td>
+      <td>[% datacenter.address.replace("((?i)$query)", '<b>$1</b>') %]</td>
+    </tr>
+    [% END %]
+  </tbody>
+</table>
+
+[% # INCLUDE _pagination.tt %]

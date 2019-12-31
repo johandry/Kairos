@@ -1,0 +1,18 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    [% FOR job IN results.jobs # .slice( pager.first - 1, pager.last - 1) %]
+    <tr>
+      <td>[% job.id %]</td>
+      <td><a href="jobs/[% job.id %]">[% job.name.replace("((?i)$query)", '<b>$1</b>') %]</a></td>
+    </tr>
+    [% END %]
+  </tbody>
+</table>
+
+[% # INCLUDE _pagination.tt %]

@@ -1,0 +1,27 @@
+<input type="hidden" name="id" id="id" value="[% command.id %]">
+<label>Name</label>
+<input type="text" name="name" id="name" value="[% command.name %]" class="input-xlarge"> 
+<div class="checkbox">
+  <label>
+    <input type="checkbox" name="system" value="1" [% IF command.system == 1 %]checked[% END %]> System
+  </label>
+</div>
+<label>Type</label>
+<select name="type" id="type" class="input-xlarge">
+  <option value="0">-- Select a Type --</option>\
+  [% FOREACH type IN types %]
+  <option value="[% type.id %]" [% IF type.id == command.type %]selected[% END %]>[% type.name %]</option>
+  [% END %]
+</select>
+<label>Script Container</label>
+<select name="container_id" id="container_id" class="input-xlarge">
+  <option value="0">-- Select a Script Container --</option>\
+  [% FOREACH container IN containers %]
+  <option value="[% container.id %]" [% IF container.id == command.container_id %]selected[% END %]>[% container.name %]</option>
+  [% END %]
+</select>
+<em>- OR -</em> <a href="/containers/new" class="btn">Create a Script Container</a> 
+<label>Parameters</label>
+<input type="text" name="parameters" id="parameters" value="[% command.parameters %]" class="input-xlarge"> 
+<label>Description</label>
+<textarea name="description" value="[% command.description %]" rows="3" class="input-xlarge">[% command.description %]</textarea>

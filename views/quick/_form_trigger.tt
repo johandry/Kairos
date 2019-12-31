@@ -1,0 +1,51 @@
+<div style="padding-top: 15px;">
+
+  <div class="form-group">
+    <div class="col-md-2"></div>  
+    <div class="btn-toolbar btn-group col-md-3" data-toggle="buttons" style="padding-left: 0px;">
+      <label class="btn btn-primary active">
+        <input type="radio" name="trigger_type_options" selected id="option1"><a href="#filewatcher" data-toggle="tab" id="t_f" style="color: white;">Filewatcher</a>
+      </label>
+      <label class="btn btn-primary">
+        <input type="radio" name="trigger_type_options" id="option2"><a href="#schedule" data-toggle="tab" id="t_s" style="color: white;">Schedule</a>
+      </label>       
+      <label class="btn btn-primary">
+        <input type="radio" name="trigger_type_options" id="option2"><a href="#condition" data-toggle="tab" id="t_c" style="color: white;">Condition</a>
+      </label> 
+    </div>
+  </div>
+
+  <input type="hidden" name="trigger_type" id="trigger_type" value="f">
+  <script type="text/javascript">
+    $('#t_f').click(function(event) {
+      $('#trigger_type').val("f")
+    });
+    $('#t_s').click(function(event) {
+      $('#trigger_type').val("s");
+      $('#set_schedule').tab('show')
+    });
+    $('#t_c').click(function(event) {
+      $('#trigger_type').val("c")
+    });  
+  </script>
+
+  <div id="myTabContent" class="tab-content">
+
+    <!-- Filewatcher -->
+    <div class="tab-pane active in" id="filewatcher">
+    [% INCLUDE quick/_form_trigger_filewatcher.tt %]
+    </div>      
+
+    <!-- Schedule -->
+    <div class="tab-pane fade" id="schedule">
+    [% INCLUDE quick/_form_trigger_schedule.tt %]
+    </div> 
+
+    <!-- Condition -->
+    <div class="tab-pane fade" id="condition">
+    [%# INCLUDE quick/_form_trigger_condition.tt %]
+    </div>
+
+  </div>
+
+</div>

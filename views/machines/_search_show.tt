@@ -1,0 +1,22 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>IP</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    [% FOR machine IN results.machines # .slice( pager.first - 1, pager.last - 1) %]
+    <tr>
+      <td>[% machine.id %]</td>
+      <td><a href="machines/[% machine.id %]">[% machine.hostname.replace("((?i)$query)", '<b>$1</b>') %].[% machine.domainname.replace("((?i)$query)", '<b>$1</b>') %]</a></td>
+      <td>[% machine.ip.replace("((?i)$query)", '<b>$1</b>') %]</td>
+      <td>[% machine.description.replace("((?i)$query)", '<b>$1</b>') %]</td>
+    </tr>
+    [% END %]
+  </tbody>
+</table>
+
+[% # INCLUDE _pagination.tt %]

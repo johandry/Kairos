@@ -1,0 +1,57 @@
+<div class="form-group">
+  <div class="col-md-1" ></div>
+  <div class="col-md-3" style="padding-left: 0px;">
+      <select name="command_credential_id" id="command_credential_id" class="selectpicker form-control" data-live-search="true" data-size="5" data-header="Select a Credential">
+        [% FOREACH credential IN credentials %]
+        <option value="[% credential.id %]" [% IF credential.id == command_credential_id %]selected[% END %]>[% credential.username %]</option>
+        [% END %]
+      </select>
+  </div>
+  <div class="col-md-3" style="padding-left: 0px;">
+      <select name="command_machine_id" id="command_machine_id" class="selectpicker form-control" data-live-search="true" data-size="5" data-header="Select a Machine">
+        [% FOREACH machine IN machines %]
+        <option value="[% machine.id %]" [% IF machine.id == command_machine_id %]selected[% END %]>[% machine.hostname %].[% machine.domainname %] ([% machine.ip %])</option>
+        [% END %]
+      </select>
+  </div>
+  <div class="col-md-3" style="padding-left: 0px;">
+    <input type="text" name="script" id="script" value="[% command_file.name %]" class="form-control" placeholder="Script" data-provide="typeahead" data-items="4" data-source='["[% scripts.0.name %]"[% FOREACH script IN scripts %][% NEXT IF scripts.index == 0 %],"[% script.name %]"[% END %]]'>
+  </div>
+</div>
+
+<!-- Parameters -->
+<div class="form-group">
+  <div class="col-md-1"></div>
+  <div class="col-md-9" style="padding-left: 0px;">
+    <input type="text" name="parameters" id="parameters" value="[% command.parameters %]" class="form-control" placeholder="Parameters">
+  </div>
+</div>
+
+<div class="form-group">
+  <div class="col-md-1" ></div>
+  <div class="col-md-9" style="padding-left: 0px;">
+    <p class="text-muted">
+    Parametes can contain plain text and variables, such as:
+    <dl class="text-muted dl-horizontal"  style="font-size: 9px">
+      <!-- <dt>{FTG_SCRIPTS}         </dt><dd>Path where doxTG store scripts in doxTG server.</dd> -->
+      <dt>{source.filename}     </dt><dd>Filename to get by the Filetransfer Job. If it have wildcards the script will receive each file that match the pattern. The Job need to be a Filetransfer.</dd>
+      <dt>{source.host}         </dt><dd>Machine where to get the file to transfer in the format hostname.domainname. The Job need to be a Filetransfer.</dd>
+      <dt>{source.ip}           </dt><dd>Machine IP where to get the file to transfer. The Job need to be a Filetransfer.</dd>
+      <dt>{target.filename}     </dt><dd>Filename to put by the Filetransfer Job. The Job need to be a Filetransfer.</dd>
+      <dt>{target.host}         </dt><dd>Machine where to put the file transfered in the format hostname.domainname. The Job need to be a Filetransfer.</dd>
+      <dt>{target.ip}           </dt><dd>Machine IP where to put the file transfered. The Job need to be a Filetransfer.</dd>
+      <dt>{filewatcher.filename}</dt><dd>Filename been watched by the Filewatcher. If it have wildcards the script will receive the wildcards. The Job need to have a Filewatcher trigger.</dd>
+      <dt>{filewatcher.host}    </dt><dd>Machine where to watch for the file. The Job need to have a Filewatcher trigger.</dd>
+      <dt>{filewatcher.ip}      </dt><dd>Machine IP where to watch for the file. The Job need to have a Filewatcher trigger.</dd>
+      <dt>{job.name}            </dt><dd>Name of the Job.</dd>
+      <dt>{job.group}           </dt><dd>Group of the Job.</dd>
+      <dt>{job.owner}           </dt><dd>Owner of the Job in the format: 'Full Name' &lt;email&gt;.</dd>
+      <dt>{job.description}     </dt><dd>Description of the Job.</dd>
+      <dt>{command.scriptname}  </dt><dd>Script name to be executed by the Command Job. The Job need to be a Command.</dd>
+      <dt>{command.host}        </dt><dd>Machine where to execute the script in the format hostname.domainname. The Job need to be a Command.</dd>
+      <dt>{command.ip}          </dt><dd>Machine IP where to execute the script. The Job need to be a Command.</dd>
+      <dt>{job.alarmto}         </dt><dd>List of contacts to notify if the Job Fail or Success. Does not matter if the job is set to notify when fail or success.</dd>
+    </dl> 
+    </p>
+  </div>
+</div>

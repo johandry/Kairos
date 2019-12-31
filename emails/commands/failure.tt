@@ -1,0 +1,6 @@
+<h2 style="color:blue">Command execution <span style="color:red">failed</span>.</h2>
+[%  INCLUDE jobs/main.tt  %]
+<h3 style="color:blue">Action</h3>
+<b>Command:</b> [% action.name %] <br/>
+<br/>
+[% message %]

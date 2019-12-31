@@ -1,0 +1,63 @@
+<div class="content">
+    
+    <div class="header">
+        
+        <h1 class="page-title">Users</h1>
+    </div>
+    
+    <ul class="breadcrumb">
+        <li><a href="/">Home</a> </li>
+        <li class="active">Users</li>
+    </ul>
+
+    <div class="container">
+        <div class="row">
+          [%  INCLUDE _flash.tt %] 
+          [% IF role == 'Admin' %]          
+          <div class="btn-toolbar">
+            <div class="btn-group">
+              <a href="[% request.uri_for("/users/new")%]" class="btn btn-primary"><i class="fa fa-plus"></i> New User</a>
+            </div>
+            <div class="btn-group">
+              <button class="btn btn-default"><i class="fa fa-cloud-upload"></i> Import</button>
+              <button class="btn btn-default"><i class="fa fa-cloud-download"></i> Export</button>
+            </div>
+          </div>
+          [% END %]
+          <div class="well">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Username</th>
+                    <th>Role</th>
+                    <th>Contact</th>
+                    <th>Email</th>
+                    <th style="width: 26px;"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  [% FOR user IN users.slice( pager.first - 1, pager.last - 1) %]
+                  <tr>
+                    <td>[% user.id %]</td>
+                    <td><a href="users/[% user.id %]">[% user.username %]</a></td>
+                    <td>[% user.role %]</td>
+                    <td>[% user.contact %]</td>
+                    <td>[% user.email %]</td>
+                    <td>
+                      [% IF role == 'Admin' %]
+                        <a href="users/[% user.id %]/edit"><i class="fa fa-pencil"></i></a>
+                        <a href="#myModal" role="button" data-toggle="modal"><i class="fa fa-remove"></i></a>
+                      [% END %]
+                    </td>
+                  </tr>
+                  [% END %]                
+                </tbody>
+              </table>
+          </div>
+          [% INCLUDE _pagination.tt %]
+          [% INCLUDE _delete_modal.tt action="/users/${user.id}/delete" %]
+                
+        </div>
+    </div>
+</div>

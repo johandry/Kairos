@@ -1,0 +1,59 @@
+<div class="content">
+    
+    <div class="header">
+        
+        <h1 class="page-title">Roles</h1>
+    </div>
+    
+    <ul class="breadcrumb">
+        <li><a href="/">Home</a> </li>
+        <li class="active">Roles</li>
+    </ul>
+
+    <div class="container">
+        <div class="row">
+          [%  INCLUDE _flash.tt %] 
+          [% IF role == 'Admin' %]          
+          <div class="btn-toolbar">
+            <div class="btn-group">
+              <a href="[% request.uri_for("/roles/new")%]" class="btn btn-primary"><i class="fa fa-plus"></i> New Role</a>
+            </div>
+            <div class="btn-group">
+              <button class="btn btn-default"><i class="fa fa-cloud-upload"></i> Import</button>
+              <button class="btn btn-default"><i class="fa fa-cloud-download"></i> Export</button>
+            </div>
+          </div>
+          [% END %]
+          <div class="well">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Users</th>
+                    <th style="width: 26px;"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  [% FOR role IN roles.slice( pager.first - 1, pager.last - 1) %]
+                  <tr>
+                    <td>[% role.id %]</td>
+                    <td><a href="roles/[% role.id %]">[% role.name %]</a></td>
+                    <td>[% role.users_count %]</td>
+                    <td>
+                      [% IF role == 'Admin' %]
+                        <a href="roles/[% role.id %]/edit"><i class="fa fa-pencil"></i></a>
+                        <a href="#myModal" role="button" data-toggle="modal"><i class="fa fa-remove"></i></a>
+                      [% END %]
+                    </td>
+                  </tr>
+                  [% END %]                
+                </tbody>
+              </table>
+          </div>
+          [% INCLUDE _pagination.tt %]
+          [% INCLUDE _delete_modal.tt action="/roles/${role.id}/delete" %]
+                
+        </div>
+    </div>
+</div>

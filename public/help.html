@@ -1,0 +1,201 @@
+ypFTG JIL Language Specifications
+
+ypFTG Job Information Language - ypFTG JIL - is a command that contains key-value pairs delimited by colon (":"). Each key-value pair describe the Job or Object attributes to set or modify.
+
+At this time it is not possible to have multiple attributes per line and they should start with an indent. The indent is set in the first line indented and should not change. It is recomended to have 2 or 4 space as indent.
+
+ypFTG JIL Commands
+
+A ypFTG JIL command start the input follow by the name of the object, then a key-value pairs to define the attributes to set or modify. 
+
+RESOURCE_COMMAND resource_name
+    [ ATTRIBUTE_NAME: attribute_value ]*
+
+The Resouces are: jobs, machines, actions, contacts and teams. The Commands are: insert, update and delete. Resources and Commands are convined to form a Resource Commands, these are:
+    insert_job job_name
+    update_job job_name
+    delete_job job_name
+    insert_action action_name
+    update_action action_name
+    delete_action action_name    
+    insert_machine machine_name
+    update_machine machine_name
+    delete_machine machine_name
+    insert_contact contact_name
+    update_contact contact_name
+    delete_contact contact_name
+    insert_team team_name
+    update_team team_name
+    delete_team team_name    
+
+The Resource Command is follow by a the name that will identify this resource. Inserts and Update commands will have attributes except the Delete command, it will just have the name. Example:
+    delete_machine fltva049
+
+Job Attributes:
+
+For Insert and Update Job Commands the list of attributes and vlaue key-value pairs is required. The first and more important is the Job Type which will define what kind of job will be: Command (c) or Filetransfer (f)
+    job_type: c
+    job_type: f
+The Second most important attribute is Trigger Type and will define how this job will be executed: Filewatcher (f), Schedule (s) or Condition (c)
+    trigger_type: f
+    trigger_type: s
+    trigger_type: c
+
+Both, job_type and trigger_type are required attributes.
+
+Depending of the Job Type and Trigger are the rest of attributes to define but some of them are in any kind of Job such as:
+    owner: corp_id
+    pre_action: pre_action_name
+    post_action: post_action_name
+    alarm_if_fail: [1|0]
+    active: [1|0]
+    alarm_to: [corp_id[,corp_id]*]
+    description: any_text_in_any_format (plain, html)
+
+All these attributes are optional. If the value or attribute-value pair of alarm_if_fail, active, owner and alarm_to is not defined the defaults values are:
+    alarm_if_fail default value is 0
+    active default value is 1
+    owner default value is the ypFTG Admin Contact
+    alarm_to default value is owner if alarm_if_fail is 1
+
+The pre_action and post_action values are Actions previously inserted. If they so not exists the JIL parser will throw an error and the pre_action name must be exactly as the Action name previously defined. 
+
+The pre_action will be executed before the main action of the Job - execute a command or transfer a file. Examples of pre_actions could be: verify the file is valid with MD5, rename a file, zip/unzip or encrypt/decrypt a file.
+
+The post_action will be executed after the main action of the Job - execute a command or transfer a file. Examples of post_actions could be: verify the file is valid with MD5, rename a file, move the source file to a history directory, flag a file, zip/unzip or encrypt/decrypt a file.
+
+The Job will execute only if the active flag is set to 1. Also, if the job fail will send an email to the contacts (emails) defined in the alarm_to attribute, if this attribute is empty will send an email to the owner and if the job have no owner the email will be sent to the ypFTG Admin.
+
+Job Trigger Schedule:
+
+Also, for any Trigger Type there is a schedule which will define at what time the trigger will start. It is defined with the attribute schedule.
+    schedule: crontab_format
+The Schedule value is a crontab string format: a 5 fields divided by space, each field could be an integer (N), an asteriks (*) or integer / asterisk (*/N).
+
+* * * * *  
+┬ ┬ ┬ ┬ ┬
+│ │ │ │ │
+│ │ │ │ │
+│ │ │ │ └───── day of week (0 - 6) (0 to 6 are Sunday to Saturday)
+│ │ │ └────────── month (1 - 12)
+│ │ └─────────────── day of month (1 - 31)
+│ └──────────────────── hour (0 - 23)
+└───────────────────────── min (0 - 59)
+
+The integer (N) means the exact day, month, hour or min. The asterisk (*) means each day, month, hour or min. The integer / asterisk (*/N) means every N days, months, hours or minutes.
+
+To know more about the cron format go to: http://en.wikipedia.org/wiki/Cron
+
+Job of Type Command:
+
+A Command Job is a job that will execute a command at the defined schedule time (if it is a Schedule Trigger Type), when some file exists (it it is a Filewatcher Trigger Type) or when other Job satifiy a defined Condition (if it is a Condition Trigger Type). Besides the previously mentioned attributes a Job of type Command will have:
+    script: script_path_and_name
+    parameters: [parameter [parameter]*]
+    machine: hostname
+    credential: username
+
+The attributes script, machine and credential are required but 'parameters' is optional. The script must exists and the full path need to be provided if not exists the Job will have the status FAILURE with an exit code different to 0. The attribute machine is where the script is located, the machine need to be inserted in advance or will the JIL parser will throw an error and the hostname need to be exactly like the hostname defined in the inserted machine, more details about Machines in the Machines section below. The attribute credential most be inserted in advance too, to know how to insert credentials read the Credentials section below. If the script cannot be accesible or the execution fail, the Job will have the status FAILURE and exit code different to 0. 
+
+If the job have pre_action and/or post_action these commands will be executed before and/or after the execution of the script.
+
+
+Job of Type Filetransfer:
+
+A Filetransfer Job is a job that will transfer a file from the source location to the target location at the defined schedule time (if it is a Schedule Trigger Type), when the source file exists (it it is a Filewatcher Trigger Type) or when other Job satifiy a defined Condition (if it is a Condition Trigger Type). Besides the previously mentioned standard attributes a Job of type Filetransfer will have:
+    source_file: file_path_and_name
+    source_machine: hostname
+    source_credential: username
+    target_file: file_path_and_name
+    target_machine: hostname
+    target_credential: username
+    protocol: [scp|sftp]
+
+The source attributes (source_file, source_machine and source_credential) define how to locate the source file. It will be in the source_machine accesible with the source_crendetial in the path and filename source_file. 
+
+The target attributes (target_file, target_machine and target_credential) define the location to transfer the source file. It will be in the target_machine accesible with the target_crendetial in the path and with filename target_file. 
+
+The source file will be transfer to the target machine and file using the defined protocol. The protocols implemented are: SCP and SFTP.
+
+The source file must exists and must be closed before transfer it. If some of these conditions fails the Job will have the status FAILURE with an exit code different to 0. Same if for some reason the file could not be transfered.
+
+If the job have pre_action and/or post_action these commands will be executed before and/or after the transfer of the source file. These actions could be very usefull to, for example, rename a file before transfer it, create a flag file, move the source file to a history directoty or delete the source file after a sucessful transfer, zip/unzip or encrypt/decrypt a file after or before the transfer, validate the source and target file with MD5, notify (send an email) before transfer the file or after the file was sucessfuly transfer.
+
+Trigger of Type Schedule:
+    schedule: 
+
+Trigger of Type Filewatcher:
+    file_to_watch:
+    machine:
+    credential:
+
+Trigger of Type Condition:
+    job_name:
+    status:
+
+Actions:
+
+    action_type: post | pre | pre/post
+
+Contacts:
+
+Teams:
+
+Machines:
+
+Datacenters:
+
+The Machines have the attribute datacenter, as this is an attribute that usualy change the insert, update and delete of datacenters is done direcctly in the database. Consult the ypFTG Admin to execute any of these actions on a Datacenter.
+
+Credentials:
+
+For every file or script there is a machine and credential. The Credentials are a pair of username and password used to login to the machine to get or set the file, or execute the script. As a Credential contain a password this value should not be inserted using JIL, the only way to insert, delete or modify a Credential is directly in the database or using the Web Application (recommended). 
+
+All the Credentials should be inserted in the application before use them with any JIL command.
+
+Examples:
+
+insert_machine fltva073
+    domainname: ffdc.sbc.com
+    ip: 135.161.22.132
+    datacenter: Fairfield
+
+insert_machine fltva052
+    domainname: ffdc.sbc.com
+    ip: 135.161.22.100
+    datacenter: Fairfield
+
+insert_team UNIXDO
+    email: unixdo@yp.com
+
+insert_contact ja6351
+    firstname: Johandry
+    lastname: Amador
+    email: ja6351@yp.com
+    team: UNIXDO
+
+insert_action delete
+    actio_type: post
+    system: 1
+    script: /opt/FTG/actions/delete.sh
+    machine: fltva073
+    credential: ftg
+    parameter: {source.name}
+
+insert_job TEST_test.txt
+    job_type: f
+    trigger_type: s
+    schedule: */10 * * * *
+    source_file: /home/ja6351/test_source.txt
+    source_machine: fltva073
+    source_credential: ja6351
+    target_file: /home/ja6351/test_target.txt
+    target_machine: fltva052
+    target_credential: ja6351
+    protocol: scp     
+    owner: ja6351
+    post_action: delete
+    alarm_if_fail: 1
+    active: 1
+    alarm_to: ja6351
+    description: Job for Testing. will tansfer a file from fltva073 to fltva052 every 10 minutes if exists and is not open.
+   

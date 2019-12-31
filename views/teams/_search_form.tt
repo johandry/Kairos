@@ -1,0 +1,7 @@
+<input type="hidden" name="id" id="id" value="[% team.id %]">
+<label>Name</label>
+<input type="text" name="name" id="name" value="[% team.name %]" class="input-xlarge">
+<label>Email</label>
+<input type="text" name="email" id="email" value="[% team.email %]" class="input-xlarge">
+<label>Description</label>
+<textarea name="description" value="[% team.description %]" rows="3" class="input-xlarge">[% team.description %]</textarea>

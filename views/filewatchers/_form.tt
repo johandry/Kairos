@@ -1,0 +1,58 @@
+<input type="hidden" name="id" id="id" value="[% filewatcher.id %]">
+
+<div class="form-group">
+  <label class="control-label col-md-2" for="name">Name</label>
+  <div class="col-md-6" style="padding-left: 0px;">
+    <!-- Name format: credential@hostname:file#schedule -->
+    <p name="name" class="form-control-static"><b>[% filewatcher.name %]</b></p>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="control-label col-md-2" for="container_id">File to watch</label>
+  <div class="col-md-3" style="padding-left: 0px;">
+    <select name="container_id" id="container_id" class="selectpicker form-control" data-live-search="true" data-size="5" data-header="Select a File to watch" required>
+      [% FOREACH container IN containers %]
+      <option value="[% container.id %]" [% IF container.id == filewatcher.container_id %]selected[% END %]>[% container.name %]</option>
+      [% END %]
+    </select>
+  </div>
+  <div class="col-md-3">
+    <a href="/containers/new" class="control-label btn btn-default">Create a Container</a> 
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="control-label col-md-2" for="schedule_id">Schedule</label>
+  <div class="col-md-3" style="padding-left: 0px;">
+    <select name="schedule_id" id="schedule_id" class="selectpicker form-control" data-live-search="true" data-size="5" data-header="Select a Schedule" required>
+      [% FOREACH schedule IN schedules %]
+      <option value="[% schedule.id %]" [% IF schedule.id == filewatcher.schedule_id %]selected[% END %]>[% schedule.name %]</option>
+      [% END %]
+    </select>
+  </div>
+  <div class="col-md-3">
+    <a href="/schedules/new" class="control-label btn btn-default">Create a Schedule</a>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="control-label col-md-2" for="description">Description</label>
+  <div class="col-md-3" style="padding-left: 0px;">
+    <textarea name="description" value="[% filewatcher.description %]" rows="3" class="form-control">[% filewatcher.description %]</textarea>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('.selectpicker').selectpicker({
+    showSubtext: true
+  });
+
+  $('select[name=container_id]').change( function () {
+    $('p[name=name]').html( '<b>' + $('select[name=container_id] option:selected').text() + '#'+ $('select[name=schedule_id] option:selected').text() + '</b>');
+  });
+
+  $('select[name=schedule_id]').change( function () {
+    $('p[name=name]').html( '<b>' + $('select[name=container_id] option:selected').text() + '#'+ $('select[name=schedule_id] option:selected').text() + '</b>');
+  });
+</script>

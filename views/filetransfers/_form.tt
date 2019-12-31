@@ -1,0 +1,73 @@
+<input type="hidden" name="id" id="id" value="[% filetransfer.id %]">
+
+<div class="form-group">
+  <label class="control-label col-md-2" for="name">Name</label>
+  <div class="col-md-6" style="padding-left: 0px;">
+    <!-- Name format: credential@hostname:file>protocol>credential@hostname:file -->
+    <p name="name" class="form-control-static"><b>[% filetransfer.name %]</b></p>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="control-label col-md-2" for="source_id">Source</label>
+  <div class="col-md-3" style="padding-left: 0px;">
+    <select name="source_id" id="source_id" class="selectpicker form-control" data-live-search="true" data-size="5" data-header="Select a Source" required>
+      [% FOREACH source IN containers %]
+      <option value="[% source.id %]" [% IF source.id == filetransfer.source_id %]selected[% END %]>[% source.name %]</option>
+      [% END %]
+    </select>
+  </div>
+  <div class="col-md-3">
+    <a href="/containers/new" class="control-label btn btn-default">Create a Source</a> 
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="control-label col-md-2" for="target_id">Target</label>
+  <div class="col-md-3" style="padding-left: 0px;">
+    <select name="target_id" id="target_id" class="selectpicker form-control" data-live-search="true" data-size="5" data-header="Select a Target" required>
+      [% FOREACH target IN containers %]
+      <option value="[% target.id %]" [% IF target.id == filetransfer.target_id %]selected[% END %]>[% target.name %]</option>
+      [% END %]
+    </select>
+  </div>
+  <div class="col-md-3">
+    <a href="/containers/new" class="control-label btn btn-default">Create a Target</a> 
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="control-label col-md-2" for="protocol_id">Protocol</label>
+  <div class="col-md-3" style="padding-left: 0px;">
+    <select name="protocol_id" id="protocol_id" class="selectpicker form-control col-md-3" data-live-search="true" data-size="5" data-header="Select a Protocol" required>
+      [% FOREACH protocol IN protocols %]
+      <option value="[% protocol.id %]" [% IF protocol.id == filetransfer.protocol_id %]selected[% END %]>[% protocol.name %]</option>
+      [% END %]
+    </select>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="control-label col-md-2" for="description">Description</label>
+  <div class="col-md-3" style="padding-left: 0px;">
+    <textarea name="description" value="[% filetransfer.description %]" rows="3" class="form-control">[% filetransfer.description %]</textarea>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('.selectpicker').selectpicker({
+    showSubtext: true
+  });
+
+  $('select[name=source_id]').change( function () {
+    $('p[name=name]').html( '<b>' + $('select[name=source_id] option:selected').text() + '><u>' + $('select[name=protocol_id] option:selected').text() + '</u>>'+ $('select[name=target_id] option:selected').text() + '</b>');
+  });
+
+  $('select[name=protocol_id]').change( function () {
+    $('p[name=name]').html( '<b>' + $('select[name=source_id] option:selected').text() + '><u>' + $('select[name=protocol_id] option:selected').text() + '</u>>'+ $('select[name=target_id] option:selected').text() + '</b>');
+  });
+
+  $('select[name=target_id]').change( function () {
+    $('p[name=name]').html( '<b>' + $('select[name=source_id] option:selected').text() + '><u>' + $('select[name=protocol_id] option:selected').text() + '</u>>'+ $('select[name=target_id] option:selected').text() + '</b>');
+  });
+</script>

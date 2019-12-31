@@ -1,0 +1,82 @@
+<input type="hidden" name="id" id="id" value="[% schedule.id %]">
+
+<label>Minutes</label>
+<input type="text" name="minutes" id="minutes" value="[% schedule.minutes %]" class="input-xlarge" placeholder="0,15,30,45 - OR - */15">
+<span class="help-block">Which minutes (comma-separated list of minutes) or every N minutes (*/N) the job should be started every hour.</span>
+<br/>
+
+<label>Hours</label>
+<input type="text" name="hours" id="hours" value="[% schedule.hours %]" class="input-xlarge" placeholder="0,8,16 - OR - */8">
+<span class="help-block">Which hours (comma-separated list of hours) or every N hours (*/N) the job should be started in a day.</span>
+<br/>
+
+<label>Day of Month</label>
+<input type="text" name="month_days" id="month_days" value="[% schedule.month_days %]" class="input-xlarge" placeholder="1,16">
+<span class="help-block">Which day the job should be started in a month. This is a comma-separated list of days.</span>
+<br/>
+
+<label>Month</label>
+<label class="checkbox inline">
+  <input type="checkbox" name="months" id="months" value="1" [% IF schedule.months.Jan %]checked[% END %]> Jan
+</label>
+<label class="checkbox inline">
+  <input type="checkbox" name="months" id="months" value="2" [% IF schedule.months.Feb %]checked[% END %]> Feb
+</label>
+<label class="checkbox inline">
+  <input type="checkbox" name="months" id="months" value="3" [% IF schedule.months.Mar %]checked[% END %]> Mar
+</label>
+<label class="checkbox inline">
+  <input type="checkbox" name="months" id="months" value="4" [% IF schedule.months.Apr %]checked[% END %]> Apr
+</label>
+<label class="checkbox inline">
+  <input type="checkbox" name="months" id="months" value="5" [% IF schedule.months.May %]checked[% END %]> May
+</label>
+<label class="checkbox inline">
+  <input type="checkbox" name="months" id="months" value="6" [% IF schedule.months.Jun %]checked[% END %]> Jun
+</label>
+<label class="checkbox inline">
+  <input type="checkbox" name="months" id="months" value="7" [% IF schedule.months.Jul %]checked[% END %]> Jul
+</label>
+<label class="checkbox inline">
+  <input type="checkbox" name="months" id="months" value="8" [% IF schedule.months.Aug %]checked[% END %]> Aug
+</label>
+<label class="checkbox inline">
+  <input type="checkbox" name="months" id="months" value="9" [% IF schedule.months.Sep %]checked[% END %]> Sep
+</label>
+<label class="checkbox inline">
+  <input type="checkbox" name="months" id="months" value="10" [% IF schedule.months.Oct %]checked[% END %]> Oct
+</label>
+<label class="checkbox inline">
+  <input type="checkbox" name="months" id="months" value="11" [% IF schedule.months.Nov %]checked[% END %]> Nov
+</label>
+<label class="checkbox inline">
+  <input type="checkbox" name="months" id="months" value="12" [% IF schedule.months.Dec %]checked[% END %]> Dec
+</label>
+<br/><br/>
+
+<label>Day of Week</label>
+<label class="checkbox inline">
+  <input type="checkbox" name="week_days" id="week_days" value="0" [% IF schedule.week_days.Sun %]checked[% END %]> Sun
+</label>
+<label class="checkbox inline">
+  <input type="checkbox" name="week_days" id="week_days" value="1" [% IF schedule.week_days.Mon %]checked[% END %]> Mon
+</label>
+<label class="checkbox inline">
+  <input type="checkbox" name="week_days" id="week_days" value="2" [% IF schedule.week_days.Tue %]checked[% END %]> Tue
+</label>
+<label class="checkbox inline">
+  <input type="checkbox" name="week_days" id="week_days" value="3" [% IF schedule.week_days.Wed %]checked[% END %]> Wed
+</label>
+<label class="checkbox inline">
+  <input type="checkbox" name="week_days" id="week_days" value="4" [% IF schedule.week_days.Ths %]checked[% END %]> Thr
+</label>
+<label class="checkbox inline">
+  <input type="checkbox" name="week_days" id="week_days" value="5" [% IF schedule.week_days.Fri %]checked[% END %]> Fri
+</label>
+<label class="checkbox inline">
+  <input type="checkbox" name="week_days" id="week_days" value="6" [% IF schedule.week_days.Sat %]checked[% END %]> Sat
+</label>
+<br/><br/>
+
+<label>Description</label>
+<textarea name="description" value="[% schedule.description %]" rows="3" class="input-xlarge">[% schedule.description %]</textarea>

@@ -1,0 +1,29 @@
+<input type="hidden" name="id" id="id" value="[% file.id %]">
+
+
+<div class="form-group">
+  <label class="control-label col-md-2" for="name">Name</label>
+  <div class="col-md-3" style="padding-left: 0px;">
+    <input type="text" name="name" id="name" value="[% file.name %]" class="form-control" placeholder="Enter file name" required autofocus>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="control-label col-md-2" for="type">Type</label>
+  <div class="col-md-3">
+    <div class="radio">
+      <label><input type="radio" name="type" value="F" [% IF file.type == 'F' %]checked[% END %]>File</label>
+    </div>
+    <div class="radio">
+      <label><input type="radio" name="type" value="S" [% IF file.type == 'S' %]checked[% END %]>Script</label>
+    </div>
+  </div>
+</div>
+
+
+<div class="form-group">
+  <label class="control-label col-md-2" for="description">Description</label>
+  <div class="col-md-3" style="padding-left: 0px;">
+    <textarea name="description" value="[% file.description %]" rows="3" class="form-control">[% file.description %]</textarea>
+  </div>
+</div>

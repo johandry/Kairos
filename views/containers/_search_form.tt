@@ -1,0 +1,31 @@
+<input type="hidden" name="id" id="id" value="[% container.id %]">
+<!-- Name cannot be edited, it have the format: credential@hostname:file
+<label>Name</label>
+<input type="text" name="name" id="name" value="[% container.name %]" class="input-xlarge"> 
+-->
+<label>Credential</label>
+<select name="credential_id" id="credential_id" class="input-xlarge">
+  <option value="0">-- Select a Credential --</option>\
+  [% FOREACH credential IN credentials %]
+  <option value="[% credential.id %]" [% IF credential.id == container.credential_id %]selected[% END %]>[% credential.username %]</option>
+  [% END %]
+</select>
+<em>- OR -</em> <a href="/credentials/new" class="btn">Create a Credential</a> 
+<label>Machine</label>
+<select name="machine_id" id="machine_id" class="input-xlarge">
+  <option value="0">-- Select a Machine --</option>\
+  [% FOREACH machine IN machines %]
+  <option value="[% machine.id %]" [% IF machine.id == container.machine_id %]selected[% END %]>[% machine.hostname %].[% machine.domainname %] ([% machine.ip %])</option>
+  [% END %]
+</select>
+<em>- OR -</em> <a href="/machines/new" class="btn">Create a Machine</a> 
+<label>File</label>
+<select name="file_id" id="file_id" class="input-xlarge">
+  <option value="0">-- Select a File --</option>\
+  [% FOREACH file IN files %]
+  <option value="[% file.id %]" [% IF file.id == container.file_id %]selected[% END %]>[% file.name %]</option>
+  [% END %]
+</select>
+<em>- OR -</em> <a href="/files/new" class="btn">Create a File</a> 
+<label>Description</label>
+<textarea name="description" value="[% container.description %]" rows="3" class="input-xlarge">[% container.description %]</textarea>

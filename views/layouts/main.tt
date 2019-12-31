@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="Content-type" content="text/html; charset=[% settings.charset %]" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>[% settings.companyname %] [% settings.appname %]</title>
+
+    <link rel="stylesheet" href="[% request.uri_base %]/css/bootstrap3/bootstrap.min.css" >
+    <link rel="stylesheet" href="[% request.uri_base %]/css/font-awesome4/font-awesome.min.css" >
+    <link rel="stylesheet" href="[% request.uri_base %]/css/bootstrap-select/bootstrap-select.min.css">
+    <link rel="stylesheet" href="[% request.uri_base %]/css/theme.css" >
+
+    <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+    <script>
+      if (!window.jQuery) {
+        document.write('<script src="[% request.uri_base %]/js/jquery/jquery-2.0.2.min.js"><\/script>');
+      }
+    </script>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <script>
+      if (!window.jQuery.ui) {
+        document.write('<script src="[% request.uri_base %]/js/jquery/jquery-ui-1.10.3.min.js"><\/script>');
+      }
+    </script>
+
+    <script src="[% request.uri_base %]/js/bootstrap3/bootstrap.min.js"></script>
+    <script src="[% request.uri_base %]/js/bootstrap-select/bootstrap-select.min.js"></script>
+    <script src="[% request.uri_base %]/js/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+    <script src="[% request.uri_base %]/js/sparkline/jquery.sparkline.min.js"></script>
+
+    <!--[if IE 7]>
+
+    <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
+
+    <![endif]-->
+
+    <!-- MAIN APP JS FILE -->
+    <script src="[% request.uri_base %]/js/app.js"></script>    
+    
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="http://i1.ypcdn.com/ypu/images/favicon.ico?dd8f6a0">
+    <link rel="apple-touch-fa fa-precomposed" sizes="144x144" href="../assets/ico/apple-touch-fa fa-144-precomposed.png">
+    <link rel="apple-touch-fa fa-precomposed" sizes="114x114" href="../assets/ico/apple-touch-fa fa-114-precomposed.png">
+    <link rel="apple-touch-fa fa-precomposed" sizes="72x72" href="../assets/ico/apple-touch-fa fa-72-precomposed.png">
+    <link rel="apple-touch-fa fa-precomposed" href="../assets/ico/apple-touch-fa fa-57-precomposed.png">
+  </head>
+
+  <!--[if lt IE 7 ]> <body class="ie ie6"> <![endif]-->
+  <!--[if IE 7 ]> <body class="ie ie7 "> <![endif]-->
+  <!--[if IE 8 ]> <body class="ie ie8 "> <![endif]-->
+  <!--[if IE 9 ]> <body class="ie ie9 "> <![endif]-->
+  <!--[if (gt IE 9)|!(IE)]><!--> 
+  <body class=""> 
+  <!--<![endif]-->
+
+  [%  INCLUDE layouts/nav_bar.tt %]
+  [% IF username %]
+  [%  INCLUDE layouts/side_bar.tt %] 
+  [% END %]
+
+  [% content %]
+
+  [% IF username %]
+  [% INCLUDE layouts/footer.tt %]
+  [% END %]
+
+  </body>
+</html>

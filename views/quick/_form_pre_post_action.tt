@@ -1,0 +1,33 @@
+<div style="padding-top: 15px;">
+
+  <!-- Pre Action -->
+  <div class="form-group">
+    <div class="col-md-1"></div>
+    <div class="col-md-3" style="padding-left: 0px;">
+      <select name="pre_actions" id="pre_actions" class="selectpicker form-control" data-live-search="true" data-size="5" data-header="Select the Pre Actions" title="Select the Pre Actions" multiple>
+        [% FOREACH pre_action IN pre_actions %]
+        <option value="[% pre_action.id %]" [% IF pre_action.selected %]selected[% END %]>[% pre_action.name %]</option>
+        [% END %]
+      </select>
+    </div>
+    <div class="col-md-3">
+      <a href="/commands/new" class="control-label btn btn-default">Create a Pre Action</a> 
+    </div>
+  </div>
+
+  <!-- Post Action -->
+  <div class="form-group">
+    <div class="col-md-1"></div>
+    <div class="col-md-3" style="padding-left: 0px;">
+      <select name="post_actions" id="post_actions" class="selectpicker form-control" data-live-search="true" data-size="5" data-header="Select the Post Actions" title="Select the Post Actions" multiple>
+        [% FOREACH post_action IN post_actions %]
+        <option value="[% post_action.id %]" [% IF post_action.selected %]selected[% END %]>[% post_action.name %]</option>
+        [% END %]
+      </select>
+    </div>
+    <div class="col-md-3">
+      <a href="/commands/new" class="control-label btn btn-default">Create a Post Action</a> 
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,62 @@
+<div class="content">
+    
+    <div class="header">
+        
+        <h1 class="page-title">Commands</h1>
+    </div>
+    
+    <ul class="breadcrumb">
+        <li><a href="/">Home</a> </li>
+        <li class="active">Commands</li>
+    </ul>
+
+    <div class="container">
+        <div class="row">
+          [%  INCLUDE _flash.tt %]
+          [% IF role == 'Admin' %]          
+          <div class="btn-toolbar">
+            <div class="btn-group">
+              <a href="[% request.uri_for("/commands/new")%]" class="btn btn-primary"><i class="fa fa-plus"></i> New Command</a>
+            </div>
+            <div class="btn-group">
+              <button class="btn btn-default"><i class="fa fa-cloud-upload"></i> Import</button>
+              <button class="btn btn-default"><i class="fa fa-cloud-download"></i> Export</button>
+            </div>
+          </div>          [% END %]
+          <div class="well">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Command</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th style="width: 26px;"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  [% FOR command IN commands.slice( pager.first - 1, pager.last - 1) %]
+                  <tr>
+                    <td>[% command.id %]</td>
+                    <td><a href="commands/[% command.id %]">[% command.name %]</a></td>
+                    <td>[% command.command %]</td>
+                    <td>[% command.type_name %]</td>
+                    <td>[% command.description %]</td>
+                    <td>
+                        [% IF role == 'Admin' %]
+                        <a href="commands/[% command.id %]/edit"><i class="fa fa-pencil"></i></a>
+                        <a href="#myModal" role="button" data-toggle="modal"><i class="fa fa-remove"></i></a>
+                        [% END %]
+                    </td>
+                  </tr>
+                  [% END %]                
+                </tbody>
+              </table>
+          </div>
+          [% INCLUDE _pagination.tt %]
+          [% INCLUDE _delete_modal.tt action="/commands/${command.id}/delete" %]
+                
+        </div>
+    </div>
+</div>

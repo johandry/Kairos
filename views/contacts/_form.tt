@@ -1,0 +1,73 @@
+<input type="hidden" name="id" id="id" value="[% contact.id %]">
+
+<div class="form-group">
+  <label class="control-label col-md-2" for="name">Name</label>
+  <div class="col-md-6" style="padding-left: 0px;">
+    <p name="name" class="form-control-static"><b>[% contact.firstname %] [% contact.lastname %]</b> &lt;[% contact.email %]&gt;</p>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="control-label col-md-2" for="corpid">Corp ID</label>
+  <div class="col-md-3" style="padding-left: 0px;">
+    <input type="text" name="corpid" id="corpid" value="[% contact.corpid %]" class="form-control" placeholder="Enter Corp ID" required autofocus>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="control-label col-md-2" for="firstname">First name</label>
+  <div class="col-md-3" style="padding-left: 0px;">
+    <input type="text" name="firstname" id="firstname" value="[% contact.firstname %]" class="form-control" placeholder="Enter First name" required>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="control-label col-md-2" for="lastname">Last name</label>
+  <div class="col-md-3" style="padding-left: 0px;">
+    <input type="text" name="lastname" id="lastname" value="[% contact.lastname %]" class="form-control" placeholder="Enter Last name" required>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="control-label col-md-2" for="lastname">Email</label>
+  <div class="col-md-3" style="padding-left: 0px;">
+    <input type="email" name="email" id="email" value="[% contact.email %]" class="form-control" placeholder="corpid@yp.com" required>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="control-label col-md-2" for="team_id">Team or Vendor</label>
+  <div class="col-md-3" style="padding-left: 0px;">
+    <select name="team_id" id="team_id" class="selectpicker form-control" data-live-search="true" data-size="5" data-header="Select a Team or Vendor" required>
+      [% FOREACH team IN teams %]
+      <option value="[% team.id %]" [% IF team.id == contact.team_id %]selected[% END %]>[% team.name %]</option>
+      [% END %]
+    </select>
+  </div>
+  <div class="col-md-3">
+    <a href="/teams/new" class="control-label btn btn-default">Create a Team or Vendor</a>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('.selectpicker').selectpicker({
+    showSubtext: true
+  });
+
+  $('input[name=corpid]').change( function () {
+    $('input[name=email]').val($(this).val() + '@yp.com');
+    $('p[name=name]').html( '<b>' + $('input[name=firstname]').val() + ' ' + $('input[name=lastname]').val() + '</b> &lt;'+ $('input[name=email]').val() +'&gt;');
+  });
+
+  $('input[name=firstname]').change( function () {
+    $('p[name=name]').html( '<b>' + $('input[name=firstname]').val() + ' ' + $('input[name=lastname]').val() + '</b> &lt;'+ $('input[name=email]').val() +'&gt;');
+  });
+
+  $('input[name=lastname]').change( function () {
+    $('p[name=name]').html( '<b>' + $('input[name=firstname]').val() + ' ' + $('input[name=lastname]').val() + '</b> &lt;'+ $('input[name=email]').val() +'&gt;');
+  });
+
+  $('input[name=email]').change( function () {
+    $('p[name=name]').html( '<b>' + $('input[name=firstname]').val() + ' ' + $('input[name=lastname]').val() + '</b> &lt;'+ $('input[name=email]').val() +'&gt;');
+  });
+</script>

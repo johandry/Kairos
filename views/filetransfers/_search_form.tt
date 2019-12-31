@@ -1,0 +1,30 @@
+<input type="hidden" name="id" id="id" value="[% filetransfer.id %]">
+<!-- Name cannot be edited, it have the format: credential@hostname:file>protocol>credential@hostname:file
+<label>Name</label>
+<input type="text" name="name" id="name" value="[% filetransfer.name %]" class="input-xlarge"> 
+-->
+<label>Source</label>
+<select name="source_id" id="source_id" class="input-xlarge">
+  <option value="0">-- Select a Source --</option>\
+  [% FOREACH source IN containers %]
+  <option value="[% source.id %]" [% IF source.id == filetransfer.source_id %]selected[% END %]>[% source.name %]</option>
+  [% END %]
+</select>
+<em>- OR -</em> <a href="/containers/new" class="btn">Create a Source</a> 
+<label>Target</label>
+<select name="target_id" id="target_id" class="input-xlarge">
+  <option value="0">-- Select a Target --</option>\
+  [% FOREACH target IN containers %]
+  <option value="[% target.id %]" [% IF target.id == filetransfer.target_id %]selected[% END %]>[% target.name %]</option>
+  [% END %]
+</select>
+<em>- OR -</em> <a href="/containers/new" class="btn">Create a Target</a> 
+<label>Protocol</label>
+<select name="protocol_id" id="protocol_id" class="input-xlarge">
+  <option value="0">-- Select a Protocol --</option>\
+  [% FOREACH protocol IN protocols %]
+  <option value="[% protocol.id %]" [% IF protocol.id == filetransfer.protocol_id %]selected[% END %]>[% protocol.name %]</option>
+  [% END %]
+</select>
+<label>Description</label>
+<textarea name="description" value="[% filetransfer.description %]" rows="3" class="input-xlarge">[% filetransfer.description %]</textarea>

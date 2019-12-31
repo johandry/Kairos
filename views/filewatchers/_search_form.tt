@@ -1,0 +1,19 @@
+<input type="hidden" name="id" id="id" value="[% filewatcher.id %]">
+<label>File to watch (Container)</label>
+<select name="container_id" id="container_id" class="input-xlarge">
+  <option value="0">-- Select a File to watch --</option>\
+  [% FOREACH container IN containers %]
+  <option value="[% container.id %]" [% IF container.id == filewatcher.container_id %]selected[% END %]>[% container.name %]</option>
+  [% END %]
+</select>
+<em>- OR -</em> <a href="/containers/new" class="btn">Create a Container</a>  
+<label>Schedule</label>
+<select name="schedule_id" id="schedule_id" class="input-xlarge">
+  <option value="0">-- Select a Schedule --</option>\
+  [% FOREACH schedule IN schedules %]
+  <option value="[% schedule.id %]" [% IF schedule.id == filewatcher.schedule_id %]selected[% END %]>[% schedule.name %]</option>
+  [% END %]
+</select>
+<em>- OR -</em> <a href="/schedules/new" class="btn">Create a Schedule</a>  
+<label>Description</label>
+<textarea name="description" value="[% filewatcher.description %]" rows="3" class="input-xlarge">[% filewatcher.description %]</textarea>

@@ -1,0 +1,57 @@
+<div class="sidebar-nav"> 
+  <a href="#dashboard-menu" class="nav-header" data-toggle="collapse"><i class="fa fa-home"></i> Home</a>
+  <ul id="dashboard-menu" class="nav  collapse in">
+    <li><a href="/">Dashboard</a></li>
+    [% IF role == 'Admin' %]
+    <li><a href="[% request.uri_for("/monitor")%]">Monitoring</a></li>
+    [% END %]
+  </ul> 
+  <a href="#jobs-menu" class="nav-header" data-toggle="collapse"><i class="fa fa-tasks"></i> Manager</a>
+  <ul id="jobs-menu" class="nav  collapse in">
+    <li><a href="[% request.uri_for("/jobs")%]">Jobs <!-- <span class="label label-info">[% jobStats.generalStats.total %]</span> --></a></li>
+    <li><a href="[% request.uri_for("/credentials")%]">Credentials</a></li>
+    <li><a href="[% request.uri_for("/machines")%]">Machines <!--  <span class="label label-info">[% machineStats.total %]</span> --></a></li>
+    <li><a href="[% request.uri_for("/contacts")%]">Contacts <!--  <span class="label label-info">[% contactStats.total %]</span> --></a></li>
+    <li><a href="[% request.uri_for("/teams")%]">Teams or Vendors</a></li>
+  </ul>
+  <a href="#advance-menu" class="nav-header" data-toggle="collapse"><i class="fa fa-cog"></i> Advance</a>
+  <ul id="advance-menu" class="nav  collapse">
+    <li><a href="[% request.uri_for("/jobgroups")%]">Job Groups</a></li>
+    <li><a href="[% request.uri_for("/filewatchers")%]">Filewatchers</a></li>
+    <li><a href="[% request.uri_for("/schedules")%]">Schedules</a></li>
+    <li><a href="[% request.uri_for("/conditions")%]">Conditions</a></li>
+    <li><a href="[% request.uri_for("/commands")%]">Commands</a></li>
+    <li><a href="[% request.uri_for("/filetransfers")%]">File Transfers</a></li>
+    <li><a href="[% request.uri_for("/containers")%]">Container</a></li>
+    <li><a href="[% request.uri_for("/files")%]">Files</a></li>
+  </ul>
+  [% IF role == 'Admin' %] 
+  <a href="#accounts-menu" class="nav-header" data-toggle="collapse"><i class="fa fa-briefcase"></i> Administration</a>
+  <ul id="accounts-menu" class="nav  collapse">
+    <li><a href="[% request.uri_for("/users")%]">Users</a></li>
+    <li><a href="[% request.uri_for("/roles")%]">Roles</a></li>
+
+<!-- Not implemented yet
+
+    <li><a href="[% request.uri_for("/protocols")%]">Protocols</a></li>
+    <li><a href="[% request.uri_for("/statuses")%]">Statuses</a></li>
+    <li><a href="[% request.uri_for("/triggers")%]">Triggers</a></li>
+    <li><a href="[% request.uri_for("/datacenters")%]">Datacenters</a></li>
+    <li><a href="[% request.uri_for("/import")%]">Import</a></li>
+    <li><a href="[% request.uri_for("/export")%]">Export</a></li>
+    <li><a href="[% request.uri_for("/security")%]">Security</a></li>
+    <li><a href="[% request.uri_for("/options")%]">Options</a></li>
+-->
+  </ul>
+  [% END %]
+<!-- Not implemented yet
+
+  <a href="#legal-menu" class="nav-header" data-toggle="collapse"><i class="fa fa-legal"></i> Legal</a>
+  <ul id="legal-menu" class="nav  collapse">
+    <li><a href="[% request.uri_for("/privacy-policy")%]">Privacy Policy</a></li>
+    <li><a href="[% request.uri_for("/terms-and-conditions")%]">Terms and Conditions</a></li>
+  </ul> 
+  <a href="[% request.uri_for("/help")%]" class="nav-header"><i class="fa fa-question"></i> Help</a>
+  <a href="[% request.uri_for("/faq")%]" class="nav-header"><i class="fa fa-comment"></i> Faq</a> 
+-->
+</div>

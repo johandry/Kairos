@@ -1,0 +1,275 @@
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- HEADER with title and last hour stats -->
+  <div class="header">
+    <div class="stats">
+      <p class="stat"><span class="number">[% jobStats.lastHourStats.failure %]</span>Failed in the Last Hour</p>
+      <p class="stat"><span class="number">[% jobStats.lastHourStats.running %]</span>Runing</p>
+      <p class="stat"><span class="number">[% jobStats.lastHourStats.starting %]</span>Starting</p>
+    </div>
+    <h1 class="page-title">Dashboard</h1>
+  </div>
+  <!-- END of HEADER -->
+
+  <!-- BREADCRUMB -->
+  <ul class="breadcrumb">
+    <li><a href="index.html">Home</a></li>
+    <li class="active">Dashboard</li>
+  </ul>
+  <!-- END of BREADCRUMB -->
+
+  <!-- CONTAINER -->
+  <div class="container">
+
+      [% INCLUDE _flash.tt %]
+
+      <!-- QUICK STATS ROW -->
+      <div class="row">      
+
+        <!-- QUICK STATS -->
+        <div class="block"> 
+          <a href="#widgettodaygraphexec" class="block-heading" data-toggle="collapse">Today Jobs Quick Stats</a>
+          <div id="widgettodaygraphexec" class="block-body collapse in">
+
+            <div class="panel-body show-stat-microcharts">
+
+              <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                <div class="easy-pie-chart txt-color-blue easyPieChart" data-percent="23" data-pie-size="50">
+                  <span class="percent percent-sign">23 </span>
+                </div>
+                <span class="easy-pie-title"> Transfers <i class="fa fa-caret-up icon-color-good"></i></span>
+                <ul class="smaller-stat hidden-sm pull-right">
+                  <li>
+                    <span class="label bg-color-darken">10GB</span>
+                  </li>
+                  <li>
+                    <span class="label bg-color-blueDark"><i class="fa fa-caret-up"></i> 10%</span>
+                  </li>
+                </ul>
+                <div class="sparkline txt-color-darken hidden-sm hidden-md pull-right" data-sparkline-type="line" data-sparkline-height="33px" data-sparkline-width="100px" data-fill-color="transparent">
+                  200, 210, 363, 247, 300, 270, 130, 187, 250, 257, 363, 247, 270
+                </div>
+              </div> 
+
+              <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                <div class="easy-pie-chart txt-color-darken easyPieChart" data-percent="36" data-pie-size="50">
+                  <span class="percent degree-sign">36 <i class="fa fa-caret-up"></i></span>
+                </div>
+                <span class="easy-pie-title"> Commands <i class="fa fa-caret-down icon-color-good"></i></span>
+                <ul class="smaller-stat hidden-sm pull-right">
+                  <li>
+                    <span class="label bg-color-red"><i class="fa fa-caret-up"></i> 124</span>
+                  </li>
+                  <li>
+                    <span class="label bg-color-blue"><i class="fa fa-caret-down"></i> 40 F</span>
+                  </li>
+                </ul>
+                <div class="sparkline txt-color-red hidden-sm hidden-md pull-right" data-sparkline-type="line" data-sparkline-height="33px" data-sparkline-width="100px" data-fill-color="transparent">
+                  2700, 3631, 2471, 2700, 3631, 2471, 1300, 1877, 2500, 2577, 2000, 2100, 3000
+                </div>
+              </div>
+
+            </div>
+            <div class="panel-body show-stat-microcharts">
+
+              <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                <div class="easy-pie-chart txt-color-orangeDark easyPieChart" data-percent="33" data-pie-size="50">
+                  <span class="percent percent-sign">35</span>
+                </div>
+                <span class="easy-pie-title"> Success <i class="fa fa-caret-up icon-color-bad"></i> </span>
+                <ul class="smaller-stat hidden-sm pull-right">
+                  <li>
+                    <span class="label bg-color-greenLight"><i class="fa fa-caret-up"></i> 97%</span>
+                  </li>
+                  <li>
+                    <span class="label bg-color-blueLight"><i class="fa fa-caret-down"></i> 44%</span>
+                  </li>
+                </ul>
+                <div class="sparkline txt-color-greenLight hidden-sm hidden-md pull-right" data-sparkline-type="line" data-sparkline-height="33px" data-sparkline-width="100px" data-fill-color="transparent">
+                  130, 187, 250, 257, 200, 210, 300, 270, 363, 247, 270, 363, 247
+                </div>
+              </div>
+
+              <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                <div class="easy-pie-chart txt-color-greenLight easyPieChart" data-percent="78.9" data-pie-size="50">
+                  <span class="percent percent-sign">78.9 </span>
+                </div>
+                <span class="easy-pie-title"> Fail <i class="fa fa-caret-down icon-color-good"></i></span>
+                <ul class="smaller-stat hidden-sm pull-right">
+                  <li>
+                    <span class="label bg-color-blueDark"><i class="fa fa-caret-up"></i> 76%</span>
+                  </li>
+                  <li>
+                    <span class="label bg-color-blue"><i class="fa fa-caret-down"></i> 3%</span>
+                  </li>
+                </ul>
+                <div class="sparkline txt-color-blue hidden-sm hidden-md pull-right" data-sparkline-type="line" data-sparkline-height="33px" data-sparkline-width="100px" data-fill-color="transparent">
+                  257, 200, 210, 300, 270, 363, 130, 187, 250, 247, 270, 363, 247
+                </div>
+              </div>        
+            </div>
+            <div class="panel-body show-stat-microcharts">
+
+              <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                <div class="easy-pie-chart txt-color-orangeDark easyPieChart" data-percent="33" data-pie-size="50">
+                  <span class="percent percent-sign">35</span>
+                </div>
+                <span class="easy-pie-title"> Active Jobs <i class="fa fa-caret-up icon-color-bad"></i> </span>
+                <ul class="smaller-stat hidden-sm pull-right">
+                  <li>
+                    <span class="label bg-color-greenLight"><i class="fa fa-caret-up"></i> 97%</span>
+                  </li>
+                  <li>
+                    <span class="label bg-color-blueLight"><i class="fa fa-caret-down"></i> 44%</span>
+                  </li>
+                </ul>
+                <div class="sparkline txt-color-greenLight hidden-sm hidden-md pull-right" data-sparkline-type="line" data-sparkline-height="33px" data-sparkline-width="100px" data-fill-color="transparent">
+                  130, 187, 250, 257, 200, 210, 300, 270, 363, 247, 270, 363, 247
+                </div>
+              </div>
+
+              <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                <div class="easy-pie-chart txt-color-greenLight easyPieChart" data-percent="78.9" data-pie-size="50">
+                  <span class="percent percent-sign">78.9 </span>
+                </div>
+                <span class="easy-pie-title"> Active Machines <i class="fa fa-caret-down icon-color-good"></i></span>
+                <ul class="smaller-stat hidden-sm pull-right">
+                  <li>
+                    <span class="label bg-color-blueDark"><i class="fa fa-caret-up"></i> 76%</span>
+                  </li>
+                  <li>
+                    <span class="label bg-color-blue"><i class="fa fa-caret-down"></i> 3%</span>
+                  </li>
+                </ul>
+                <div class="sparkline txt-color-blue hidden-sm hidden-md pull-right" data-sparkline-type="line" data-sparkline-height="33px" data-sparkline-width="100px" data-fill-color="transparent">
+                  257, 200, 210, 300, 270, 363, 130, 187, 250, 247, 270, 363, 247
+                </div>
+              </div>        
+            </div>
+
+          </div>
+        </div>
+        <!-- END of QUICK STATS -->
+      </div>
+      <!-- END of QUICK STATS ROW -->      
+
+      <!-- TODAY STATS ROW -->
+      <div class="row">
+
+        <!-- TODAY STATS Block -->      
+        <div class="block">
+          <!-- HEADER -->
+          <div class="block-heading">
+            <!-- 
+            <span class="block-icon pull-right">     
+
+              <a href="#" class="demo-cancel-click" rel="tooltip" title="Click to refresh"><i class="glyphicon glyphfa fa-refresh"></i></a>
+
+            </span> 
+            --> 
+            <a href="#widgetlateststats" data-toggle="collapse">Today Stats</a>
+          </div>
+
+          <!-- CONTENT -->
+          <div id="widgetlateststats" class="block-body collapse in">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Job Name</th>
+                  <th>Group</th>
+                  <th>Start On</th>
+                  <th>Status</th>
+                  <th>End On</th>
+                  <th>Exit Code</th>
+                </tr>
+              </thead>
+              <tbody>
+                [% FOR jobinstance IN jobStats.jobinstances.slice( pager.first - 1, pager.last - 1) %]
+                <tr>
+                  <td><a href="jobinstance/[% jobinstance.id %]/status">[% jobinstance.id %]</a>
+                  </td>
+                  <td><a href="jobs/[% jobinstance.job_id %]">[% jobinstance.job %]</a>
+                  </td>
+                  <td>[% jobinstance.group %]</td>
+                  <td>[% jobinstance.start_on %]</td>
+                  <td><span class="label label-default [% IF jobinstance.status == 'FAILURE' %]label-danger[% ELSIF jobinstance.status == 'SUCCESS' %]label-success[% ELSIF jobinstance.status == 'RUNNING' %]label-info[% ELSE %] [% END %]">[% jobinstance.status %]</span>
+                  </td>
+                  <td>[% jobinstance.end_on %]</td>
+                  <td>[% jobinstance.exit_code %]</td>
+                </tr>
+                [% END %]
+              </tbody>
+            </table>
+            [% INCLUDE _pagination.tt %]
+          </div>
+        </div>
+        <!-- END of TODAY STATS Block -->        
+      </div>
+      <!-- END of TODAY STATS ROW -->
+
+      <!-- NAGIOS IMAGES ROW -->
+      <div class="row">      
+        <!-- NAGIOS IMAGES -->
+        <div class="block"> 
+          <a href="#widgettodaygraphexec" class="block-heading" data-toggle="collapse">Last Executed Jobs Stats</a>
+          <div id="widgettodaygraphexec" class="block-body collapse in">
+              <img style="display: block; margin: 5px; padding: 0;" src="http://doxtg:D0xt6@fltva076.ffdc.sbc.com:8080/pnp4nagios/image?source=0&host=flph068&srv=DOXTG&view=0&start=-1day&graph_height=90&graph_width=1200" class="img-responsive" />
+          </div>
+        </div>
+
+        <div class="block"> 
+          <a href="#widgettodaygraphfail" class="block-heading" data-toggle="collapse">Last Failed Jobs Stats</a>
+          <div id="widgettodaygraphfail" class="block-body collapse in">
+              <img style="display: block; margin: 5px; padding: 0;" src="http://doxtg:D0xt6@fltva076.ffdc.sbc.com:8080/pnp4nagios/image?source=1&host=flph068&srv=DOXTG&view=0&start=-1day&graph_height=90&graph_width=1200" class="img-responsive" />
+          </div>
+        </div>
+        <!-- END of NAGIOS IMAGES -->
+      </div>
+      <!-- END of NAGIOS IMAGES ROW -->
+
+      <!-- ACCESS HISTORY ROW -->
+      <div class="row">
+        <!-- ACCESS HISTORY -->
+        <div class="block">
+          <!-- HEADER -->
+          <a href="#widgetaccesshistory" class="block-heading" data-toggle="collapse">Today Access History</a>
+          <!-- CONTENT -->
+          <div id="widgetaccesshistory" class="block-body collapse in">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Username</th>
+                  <th>Full Name</th>
+                  <th>Login Time</th>
+                  <th style="width: 26px;"></th>
+                </tr>
+              </thead>
+              <tbody>
+                [% FOR access IN accessHistory %]
+                <tr>
+                  <td><p>[% access.username %]</p></td>
+                  <td><p><a href="contacts/[% access.user_id %]">[% access.userfullname %]</a></p></td>
+                  <td><p>[% access.accessTime %]</p></td>
+                  <td> <a href="#"><i class="glyphicon glyphfa fa-list-alt"></i></a></td>
+                </tr>
+                [% END %]
+              </tbody>
+            </table>
+            <!-- <p><a href="#">More...</a></p> -->
+          </div>
+          <!-- END of CONTENT -->
+        </div>
+        <!-- END of ACCESS HISTORY -->
+      </div> 
+      <!-- END of ACCESS HISTORY ROW -->
+
+  <!-- END of CONTAINER -->
+
+</div>
+<!-- END of CONTENT -->
+
+<script type="text/javascript">
+  pageSetUp();
+</script>

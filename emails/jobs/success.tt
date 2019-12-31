@@ -1,0 +1,6 @@
+<h2 style="color:blue">Job execution <span style="color:green">successful</span>.</h2>
+[%  INCLUDE jobs/main.tt  %]
+<h3 style="color:blue">Action</h3>
+<b>[% action.type %]:</b> [% action.name %]<br/>
+<br/>
+[% message %]

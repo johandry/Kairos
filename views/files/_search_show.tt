@@ -1,0 +1,20 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    [% FOR file IN results.files # .slice( pager.first - 1, pager.last - 1) %]
+    <tr>
+      <td>[% file.id %]</td>
+      <td><a href="files/[% file.id %]">[% file.name.replace("((?i)$query)", '<b>$1</b>') %]</a></td>
+      <td>[% file.description.replace("((?i)$query)", '<b>$1</b>') %]</td>
+    </tr>
+    [% END %]
+  </tbody>
+</table>
+
+[% # INCLUDE _pagination.tt %]  

@@ -1,0 +1,68 @@
+[% 
+  resource = 'team'
+  nameAttr = 'name'
+
+  title    = resource.ucfirst _ " ( " _ ${resource}.${nameAttr} _ " )"
+%]
+<div class="content">
+
+  [%  INCLUDE layouts/common/header.tt %]
+
+  <div class="container">
+    <div class="row">
+      [%  INCLUDE _flash.tt %]
+                    
+      <div class="btn-toolbar">
+          [% IF role == 'Admin' %]
+          <a href="/teams/[% team.id %]/edit" class="btn btn-primary"><i class="fa fa-edit"></i> Edit</a>
+          <a href="#myModal" data-toggle="modal" class="btn btn-default [% IF contacts.size %]btn-danger[% END %]"><i class="fa fa-trash-o"></i> Delete</a>
+          [% END %]
+          <a href="[% request.uri_for("/teams")%]" class="btn btn-default"><i class="fa fa-list-alt"></i> List</a>
+      </div>
+
+      <div class="well">
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#team" data-toggle="tab">Team</a></li>
+          <li><a href="#contacts" data-toggle="tab">Contacts  <span class="badge [% IF contacts.size %]alert-danger[% END %]">[% contacts.size %]</span></a></li>
+        </ul>
+
+        <div id="myTabContent" class="tab-content">
+          <div class="tab-pane active in" id="team">
+            <table class="table table-hover">
+              <tbody>
+                <tr>
+                  <th style="width: 15%">ID</th>
+                  <td>[% team.id %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Name</th>
+                  <td>[% team.name %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Email</th>
+                  <td>[% team.email %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Description</th>
+                  <td>[% team.description %]</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="tab-pane fade" id="contacts">
+            <ul class="nav nav-list">   
+              [% FOREACH contact IN contacts %]   
+                <li><a href="/contacts/[% contact.id %]">[% contact.firstname %] [% contact.lastname %] ([% contact.email %])</a></li> 
+              [% END %]
+            </ul>
+          </div>
+          
+        </div>
+      </div>
+
+      [% INCLUDE _delete_modal.tt action="/teams/${team.id}/delete" %]
+
+    </div>
+  </div>
+</div>

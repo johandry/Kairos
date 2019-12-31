@@ -1,0 +1,36 @@
+<script src="[% request.uri_base %]/javascripts/showpassword.js"></script>
+<input type="hidden" name="id" id="id" value="[% user.id %]">
+<div class="control-group">
+    <label class="control-label" for="password">Username</label>
+    <div class="controls">
+      <input type="text" name="username" id="username" value="[% user.username %]" class="input-xlarge">
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label" for="password">Password</label>
+    <div class="controls">
+        <input type="password" id="password" class="input-xlarge" placeholder="New Password">
+    </div>
+</div>
+<script type="text/javascript">
+  $('#password').showPassword();
+</script>
+
+<label>Role</label>
+<select name="role_id" id="role_id" class="input-xlarge">
+  <option value="0">-- Select a Role --</option>\
+  [% FOREACH role IN roles %]
+  <option value="[% role.id %]" [% IF role.id == user.role_id %]selected[% END %]>[% role.name %]</option>
+  [% END %]
+</select>
+<em>- OR -</em> <a href="/roles/new" class="btn">Create a Role</a> 
+
+<label>Contact</label>
+<select name="contact_id" id="contact_id" class="input-xlarge">
+  <option value="0">-- Select a Contact --</option>\
+  [% FOREACH contact IN contacts %]
+  <option value="[% contact.id %]" [% IF contact.id == user.contact_id %]selected[% END %]>[% contact.firstname %] [% contact.lastname %] ([% contact.email %])</option>
+  [% END %]
+</select>
+<em>- OR -</em> <a href="/contacts/new" class="btn">Create a Contact</a> 

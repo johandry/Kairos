@@ -1,0 +1,9 @@
+<input type="hidden" name="id" id="id" value="[% file.id %]">
+<label>Name</label>
+<input type="text" name="name" id="name" value="[% file.name %]" class="input-xlarge">
+<label>Type</label>
+<label class="radio"><input type="radio" name="type" value="F" [% IF file.type == 'F' %]checked[% END %]>File</label>
+<label class="radio"><input type="radio" name="type" value="S" [% IF file.type == 'S' %]checked[% END %]>Script</label>
+<br/>
+<label>Description</label>
+<textarea name="description" value="[% file.description %]" rows="3" class="input-xlarge">[% file.description %]</textarea>

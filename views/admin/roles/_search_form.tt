@@ -1,0 +1,7 @@
+<input type="hidden" name="id" id="id" value="[% role.id %]">
+<div class="control-group">
+    <label class="control-label" for="password">Name</label>
+    <div class="controls">
+      <input type="text" name="name" id="name" value="[% role.name %]" class="input-xlarge">
+    </div>
+</div>

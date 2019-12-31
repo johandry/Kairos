@@ -1,0 +1,22 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    [% FOR team IN results.teams # .slice( pager.first - 1, pager.last - 1) %]
+    <tr>
+      <td>[% team.id %]</td>
+      <td><a href="teams/[% team.id %]">[% team.name.replace("((?i)$query)", '<b>$1</b>') %]</a></td>
+      <td>[% team.email.replace("((?i)$query)", '<b>$1</b>') %]</td>
+      <td>[% team.description.replace("((?i)$query)", '<b>$1</b>') %]</td>
+    </tr>
+    [% END %]
+  </tbody>
+</table>
+
+[% # INCLUDE _pagination.tt %]

@@ -1,0 +1,75 @@
+<input type="hidden" name="id" id="id" value="[% container.id %]">
+
+<div class="form-group">
+  <label class="control-label col-md-2" for="name">Name</label>
+  <div class="col-md-6" style="padding-left: 0px;">
+    <p name="name" class="form-control-static"><b>[% container.name %]</p>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="control-label col-md-2" for="credential_id">Credential</label>
+  <div class="col-md-3" style="padding-left: 0px;">
+    <select name="credential_id" id="credential_id" class="selectpicker form-control" data-live-search="true" data-size="5" data-header="Select a Credential" required>
+      [% FOREACH credential IN credentials %]
+      <option value="[% credential.id %]" [% IF credential.id == container.credential_id %]selected[% END %]>[% credential.username %]</option>
+      [% END %]
+    </select>
+  </div>
+  <div class="col-md-3">
+    <a href="/credentials/new" class="control-label btn btn-default">Create a Credential</a>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="control-label col-md-2" for="machine_id">Machine</label>
+  <div class="col-md-3" style="padding-left: 0px;">
+    <select name="machine_id" id="machine_id" class="selectpicker form-control" data-live-search="true" data-size="5" data-header="Select a Machine" required>
+      [% FOREACH machine IN machines %]
+      <option value="[% machine.id %]" [% IF machine.id == container.machine_id %]selected[% END %] data-subtext="[% machine.ip %]">[% machine.hostname %].[% machine.domainname %]</option>
+      [% END %]
+    </select>
+  </div>
+  <div class="col-md-3">
+    <a href="/machines/new" class="control-label btn btn-default">Create a Machine</a>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="control-label col-md-2" for="file_id">File</label>
+  <div class="col-md-3" style="padding-left: 0px;">
+    <select name="file_id" id="file_id" class="selectpicker form-control" data-live-search="true" data-size="5" data-header="Select a File" required>
+      [% FOREACH file IN files %]
+      <option value="[% file.id %]" [% IF file.id == container.file_id %]selected[% END %]>[% file.name %]</option>
+      [% END %]
+    </select>
+  </div>
+  <div class="col-md-3">
+    <a href="/files/new" class="control-label btn btn-default">Create a File</a>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="control-label col-md-2" for="description">Description</label>
+  <div class="col-md-3" style="padding-left: 0px;">
+    <textarea name="description" value="[% container.description %]" rows="3" class="form-control">[% container.description %]</textarea>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('.selectpicker').selectpicker({
+    showSubtext: true
+  });
+
+  $('select[name=credential_id]').change( function () {
+    $('p[name=name]').html( '<b>' + $('select[name=credential_id] option:selected').text() + '@' + $('select[name=machine_id] option:selected').text() + ':'+ $('select[name=file_id] option:selected').text() + '</b>');
+  });
+
+  $('select[name=machine_id]').change( function () {
+    $('p[name=name]').html( '<b>' + $('select[name=credential_id] option:selected').text() + '@' + $('select[name=machine_id] option:selected').text() + ':'+ $('select[name=file_id] option:selected').text() + '</b>');
+  });
+
+  $('select[name=file_id]').change( function () {
+    $('p[name=name]').html( '<b>' + $('select[name=credential_id] option:selected').text() + '@' + $('select[name=machine_id] option:selected').text() + ':'+ $('select[name=file_id] option:selected').text() + '</b>');
+  });
+</script>

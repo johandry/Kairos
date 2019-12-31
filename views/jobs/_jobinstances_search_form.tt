@@ -1,0 +1,71 @@
+<input type="hidden" name="id" id="id" value="[% job.id %]">
+<label>Name</label>
+<input type="text" name="name" id="name" value="[% job.name %]" class="input-xlarge">
+<label>Group</label>
+<select name="group_id" id="group_id" class="input-xlarge">
+  <option value="0">-- Select a Group --</option>
+  [% FOREACH group IN groups %]
+  <option value="[% group.id %]" [% IF group.id == job.group_id %]selected[% END %]>[% group.name %]</option>
+  [% END %]
+</select>     
+<em>- OR -</em> <a href="/jobgroups/new" class="btn">Create a Group</a> 
+<label>Action Type: Action Name</label>
+<select name="action_type" id="action_type" class="input-xlarge">
+  <option value="0">-- Select an Action Type: Action Name--</option>
+  [% FOREACH action IN allActions %]
+  <option value="[% action.id %]" [% IF action.id == "$job.action_type:$job.action_id" %]selected[% END %]>[% action.name %]</option>
+  [% END %]
+</select>
+<em>- OR -</em> <a href="/filetransfer/new" class="btn">Create a Filetransfer</a> <a href="/commands/new" class="btn">Create a Command</a>
+<label>Trigger Type: Trigger Name</label>
+<select name="trigger_type" id="trigger_type" class="input-xlarge">
+  <option value="0">-- Select a Trigger Type: Trigger Name--</option>
+  [% FOREACH trigger IN allTriggers %]
+  <option value="[% trigger.id %]" [% IF trigger.id == "$job.trigger_type:$job.trigger_id" %]selected[% END %]>[% trigger.name %]</option>
+  [% END %]
+</select>
+<em>- OR -</em> <a href="/filewatchers/new" class="btn">Create a Filewatcher</a> <a href="/schedules/new" class="btn">Create a Schedule</a> <a href="/conditions/new" class="btn">Create a Condition</a>
+<label>Owner</label>
+<select name="contact_id" id="contact_id" class="input-xlarge">
+  <option value="0">-- Select a Contact --</option>
+  [% FOREACH contact IN contacts %]
+  <option value="[% contact.id %]" [% IF contact.id == job.contact_id %]selected[% END %]>[% contact.firstname %] [% contact.lastname %]([% contact.email %])</option>
+  [% END %]
+</select>     
+<em>- OR -</em> <a href="/contacts/new" class="btn">Create a Contact</a>  
+<label>Pre Actions</label>
+<select name="pre_actions" id="pre_actions" class="input-xlarge" multiple>
+  <option value="0">-- None --</option>
+  [% FOREACH pre_action IN allPreActions %]
+  <option value="[% pre_action.id %]" [% IF pre_action.selected %]selected[% END %]>[% pre_action.name %]</option>
+  [% END %]
+</select>
+<em>- OR -</em> <a href="/commands/new" class="btn">Create a Pre Action</a>
+<label>Post Actions</label>
+<select name="post_actions" id="post_actions" class="input-xlarge" multiple>
+  <option value="0">-- None --</option>
+  [% FOREACH post_action IN allPostActions %]
+  <option value="[% post_action.id %]" [% IF post_action.selected %]selected[% END %]>[% post_action.name %]</option>
+  [% END %]
+</select>
+<em>- OR -</em> <a href="/commands/new" class="btn">Create a Post Action</a>
+<div class="checkbox">
+  <label>
+    <input type="checkbox" name="alarm_if_fail" value="1" [% IF job.alarm_if_fail == 1 %]checked[% END %]> Alarm if Fail
+  </label>
+</div>
+<label>Send Alarms to</label>
+<select name="alarm_contacts" id="alarm_contacts" class="input-xlarge" multiple>
+  <option value="0">-- None --</option>
+  [% FOREACH contact IN contacts %]
+  <option value="[% contact.id %]" [% IF contact.selected %]selected[% END %]>[% contact.firstname %] [% contact.lastname %] ([% contact.email %])</option>
+  [% END %]
+</select>
+<em>- OR -</em> <a href="/contacts/new" class="btn">Create a Contact</a>
+<div class="checkbox">
+  <label>
+    <input type="checkbox" name="active" value="1" [% IF job.active == 1 %]checked[% END %]> Active
+  </label>
+</div>
+<label>Description</label>
+<textarea name="description" value="[% job.description %]" rows="3" class="input-xlarge">[% job.description %]</textarea>

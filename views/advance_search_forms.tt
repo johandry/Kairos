@@ -1,0 +1,121 @@
+<div class="block">
+  <div class="block-heading">
+      <a href="#widgetadvancesearch" data-toggle="collapse">Advance Search</a>
+  </div>          
+  <div id="widgetadvancesearch" class="block-body collapse in">            
+    <ul class="nav nav-tabs">
+      <li><a href="#jobinstances_search" data-toggle="tab">Job Instances</a></li>
+      <li><a href="#jobs_search" data-toggle="tab">Jobs</a></li>
+      <li><a href="#filewatchers_search" data-toggle="tab">Filewatchers</a></li>
+      <li><a href="#schedules_search" data-toggle="tab">Schedules</a></li>
+      <li><a href="#conditions_search" data-toggle="tab">Conditions</a></li>
+      <li><a href="#commands_search" data-toggle="tab">Commands</a></li>
+      <li><a href="#filetransfers_search" data-toggle="tab">File Transfers</a></li>
+      <li><a href="#containers_search" data-toggle="tab">Containers</a></li>
+      <li><a href="#credentials_search" data-toggle="tab">Credentials</a></li>
+      <li><a href="#machines_search" data-toggle="tab">Machines</a></li>
+      <li><a href="#datacenters_search" data-toggle="tab">Datacenters</a></li>
+      <li><a href="#files_search" data-toggle="tab">Files</a></li>
+      <li><a href="#contacts_search" data-toggle="tab">Contacts</a></li>
+      <li><a href="#teams_search" data-toggle="tab">Teams</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+      <div class="tab-pane fade" id="jobinstances_search">
+        <form action="jobinstances/search">
+        [%  INCLUDE jobs/_jobinstances_search_form.tt %] 
+        <div class="btn-toolbar"><button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button></div>
+        </form>
+      </div>
+      <div class="tab-pane fade" id="jobs_search">
+        <form action="jobs/search">
+        [%  INCLUDE jobs/_search_form.tt %]  
+        <div class="btn-toolbar"><button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button></div>
+        </form>
+      </div>                
+      <div class="tab-pane fade" id="filewatchers_search">
+        <form action="jobs/search">
+        [%  INCLUDE filewatchers/_search_form.tt %] 
+        <div class="btn-toolbar"><button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button></div>
+        </form>
+      </div>       
+      <div class="tab-pane fade" id="schedules_search">
+        <form action="jobs/search">
+        [%  INCLUDE schedules/_search_form.tt %] 
+        <div class="btn-toolbar"><button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button></div>
+        </form>
+      </div>      
+      <div class="tab-pane fade" id="conditions_search">
+        <form action="jobs/search">
+        [%  INCLUDE conditions/_search_form.tt %] 
+        <div class="btn-toolbar"><button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button></div>
+        </form>
+      </div>   
+      <div class="tab-pane fade" id="commands_search">
+        <form action="jobs/search">
+        [%  INCLUDE commands/_search_form.tt %] 
+        <div class="btn-toolbar"><button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button></div>
+        </form>
+      </div>  
+      <div class="tab-pane fade" id="filetransfers_search">
+        <form action="jobs/search">
+        [%  INCLUDE filetransfers/_search_form.tt %] 
+        <div class="btn-toolbar"><button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button></div>
+        </form>
+      </div>
+      <div class="tab-pane fade" id="containers_search">
+        <form action="jobs/search">
+        [%  INCLUDE containers/_search_form.tt %] 
+        <div class="btn-toolbar"><button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button></div>
+        </form>
+      </div>
+      <div class="tab-pane fade" id="credentials_search">
+        <form action="jobs/search">
+        [%  INCLUDE credentials/_search_form.tt %] 
+        <div class="btn-toolbar"><button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button></div>
+        </form>
+      </div>
+      <div class="tab-pane fade" id="machines_search">
+        <form action="jobs/search">
+        [%  INCLUDE machines/_search_form.tt %] 
+        <div class="btn-toolbar"><button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button></div>
+        </form>
+      </div>      
+      <div class="tab-pane fade" id="datacenters_search">
+        <form action="jobs/search">
+        [%  INCLUDE machines/_datacenters_search_form.tt %]
+        <div class="btn-toolbar"><button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button></div>
+        </form>
+      </div>                 
+      <div class="tab-pane fade" id="files_search">
+        <form action="jobs/search">
+        [%  INCLUDE files/_search_form.tt %] 
+        <div class="btn-toolbar"><button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button></div>
+        </form>
+      </div>      
+      <div class="tab-pane fade" id="contacts_search">
+        <form action="jobs/search">
+        [%  INCLUDE contacts/_search_form.tt %] 
+        <div class="btn-toolbar"><button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button></div>
+        </form>
+      </div>           
+      <div class="tab-pane fade" id="teams_search">
+        <form action="jobs/search">
+        [%  INCLUDE teams/_search_form.tt %] 
+        <div class="btn-toolbar"><button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button></div>
+        </form>
+      </div>  
+      <div class="tab-pane fade" id="roles_search">
+        <form action="jobs/search">
+        [%  INCLUDE admin/roles/_search_form.tt %] 
+        <div class="btn-toolbar"><button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button></div>
+        </form>
+      </div> 
+      <div class="tab-pane fade" id="users_search">
+        <form action="jobs/search">
+        [%  INCLUDE admin/users/_search_form.tt %] 
+        <div class="btn-toolbar"><button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button></div>
+        </form>
+      </div> 
+    </div>
+  </div> 
+</div> 

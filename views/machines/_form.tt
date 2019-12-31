@@ -1,0 +1,72 @@
+<input type="hidden" name="id" id="id" value="[% machine.id %]">
+
+<div class="form-group">
+  <label class="control-label col-md-2" for="hostname">Host Name</label>
+  <div class="col-md-3" style="padding-left: 0px;">
+    <input type="text" name="hostname" id="hostname" value="[% machine.hostname %]" class="form-control" placeholder="Enter Host name" required autofocus>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="control-label col-md-2" for="domainname">Domain Name</label>
+  <div class="col-md-3" style="padding-left: 0px;">
+    <input type="text" name="domainname" id="domainname" value="[% IF ! machine.domainname %]ffdc.sbc.com[% ELSE %][% machine.domainname %][% END %]" class="form-control" placeholder="Machine Domain name" required>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="control-label col-md-2" for="ip">IP Name</label>
+  <div class="col-md-3" style="padding-left: 0px;">
+    <input type="text" name="ip" id="ip" value="[% machine.ip %]" class="form-control" placeholder="Machine IP Address" required>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="control-label col-md-2" for="dc_id">Datacenter</label>
+  <div class="col-md-3" style="padding-left: 0px;">
+  <select name="dc_id" id="dc_id" class="selectpicker form-control col-md-3" data-live-search="true" data-size="5" data-header="Select a Type" required>
+    [% FOREACH datacenter IN datacenters %]
+    <option value="[% datacenter.id %]" [% IF datacenter.id == machine.dc_id %]selected[% END %]>[% datacenter.name %]</option>
+    [% END %]
+  </select>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="control-label col-md-2" for="description">Description</label>
+  <div class="col-md-3" style="padding-left: 0px;">
+    <textarea name="description" value="[% machine.description %]" rows="3" class="form-control">[% machine.description %]</textarea>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('.selectpicker').selectpicker({
+    showSubtext: true
+  });
+
+  $('#hostname').change( function () {
+    $.getJSON('/ip/' + $('#hostname').val() + '.' + $('#domainname').val() + '', function(data) {
+      if ( data.ip != null ) {
+        $('#ip').val(data.ip);
+        $('#ip').parent().parent().removeClass('has-error');
+        $('#ip').parent().parent().addClass('has-success');
+      } else {
+        $('#ip').val('');
+        $('#ip').attr('placeholder', 'IP not found for ' + $('#hostname').val() + '.' + $('#domainname').val());
+        $('#ip').parent().parent().removeClass('has-success');
+        $('#ip').parent().parent().addClass('has-error');         
+      }
+
+    });
+  });    
+
+  $('select[name=dc_id]').change( function () {
+    if ($('select[name=dc_id] option:selected').text() == 'Fairfield' ) {
+      $('#domainname').val('ffdc.sbc.com')
+    } else {
+      if ( $('#domainname').val() == 'ffdc.sbc.com' ) {
+        $('#domainname').val('')
+      }
+    }
+  });
+</script>

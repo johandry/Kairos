@@ -1,0 +1,11 @@
+[% 
+  resource = 'contact'
+  nameAttr = ''
+
+  # The attribute name are two attributes: firstname and lastname
+
+  path     = "${resource}s"
+  title    = "Edit " _ resource.ucfirst _ " ( ${contact.firstname} ${contact.lastname} )"
+  url      = request.uri_for("/${resource}s/" _ ${resource}.id )
+%]
+[% INCLUDE layouts/common/edit.tt %]

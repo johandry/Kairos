@@ -1,0 +1,17 @@
+<input type="hidden" name="id" id="id" value="[% contact.id %]">
+<label>Corp ID</label>
+<input type="text" name="corpid" id="corpid" value="[% contact.corpid %]" class="input-xlarge">
+<label>First Name</label>
+<input type="text" name="firstname" id="firstname" value="[% contact.firstname %]" class="input-xlarge">
+<label>Last Name</label>
+<input type="text" name="lastname" id="lastname" value="[% contact.lastname %]" class="input-xlarge">
+<label>Email</label>
+<input type="text" name="email" id="email" value="[% contact.email %]" class="input-xlarge">
+<label>Team or Vendor</label>
+<select name="team_id" id="team_id" class="input-xlarge">
+  <option value="0">-- Select a Team or Vendor--</option>\
+  [% FOREACH team IN teams %]
+  <option value="[% team.id %]" [% IF team.id == contact.team_id %]selected[% END %]>[% team.name %]</option>
+  [% END %]
+</select>
+<em>- OR -</em> <a href="/teams/new" class="btn">Create a Team</a> 

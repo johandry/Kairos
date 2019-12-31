@@ -1,0 +1,11 @@
+[% 
+  resource = 'machine'
+  nameAttr = ''
+
+  # The attribute name are two attributes: hostname and domainname
+
+  path     = "${resource}s"
+  title    = "Edit " _ resource.ucfirst _ " ( ${machine.hostname}.${machine.domainname} )"
+  url      = request.uri_for("/${resource}s/" _ ${resource}.id )
+%]
+[% INCLUDE layouts/common/edit.tt %]

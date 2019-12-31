@@ -1,0 +1,59 @@
+[% 
+  resource = 'role'
+  nameAttr = 'name'
+
+  # The token for the logged user role is 'role' so the variable with the role to edit is 'arole'
+
+  title    = resource.ucfirst _ " ( " _ arole.${nameAttr} _ " )"
+%]
+<div class="content">
+
+  [%  INCLUDE layouts/common/header.tt %]
+
+  <div class="container">
+    <div class="row">
+      [%  INCLUDE _flash.tt %]
+
+      <div class="btn-toolbar">
+          [% IF role == 'Admin' %]
+          <a href="/roles/[% arole.id %]/edit" class="btn btn-primary"><i class="fa fa-edit"></i> Edit</a>
+          <a href="#myModal" data-toggle="modal" class="btn btn-default [% IF users.size %]btn-danger[% END %]"><i class="fa fa-trash-o"></i> Delete</a>
+          [% END %]
+          <a href="[% request.uri_for("/roles")%]" class="btn btn-default"><i class="fa fa-list-alt"></i> List</a>
+      </div>
+
+      <div class="well">
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#role" data-toggle="tab">Role</a></li>
+          <li><a href="#users" data-toggle="tab">Users  <span class="badge [% IF users.size %]alert-danger[% END %]">[% users.size %]</span></a></li>
+        </ul>
+        <div id="myTabContent" class="tab-content">
+          <div class="tab-pane active in" id="role">
+          <table class="table table-hover">
+            <tbody>
+              <tr>
+                <th style="width: 15%">ID</th>
+                <td>[% arole.id %]</td>
+              </tr>
+              <tr>
+                <th style="width: 15%">Name</th>
+                <td>[% arole.name %]</td>
+              </tr>              
+            </tbody>
+          </table>
+          </div>
+          <div class="tab-pane fade" id="users">
+            <ul class="nav nav-list">
+              [% FOREACH user IN users %]  
+                <li><a href="/users/[% user.id %]">[% user.username %]</a></li> 
+              [% END %]
+            </ul>
+          </div>      
+        </div>
+      </div>
+
+      [% INCLUDE _delete_modal.tt action="/roles/${arole.id}/delete" %]
+
+    </div>
+  </div>
+</div>

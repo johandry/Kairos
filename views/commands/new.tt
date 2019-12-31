@@ -1,0 +1,8 @@
+[% 
+  resource = 'command'
+  
+  path     = "${resource}s"
+  title    = "New " _ resource.ucfirst
+  url      = request.uri_for("/${resource}s")
+%]
+[% INCLUDE layouts/common/new.tt %]

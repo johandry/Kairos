@@ -1,0 +1,158 @@
+[% 
+  resource = 'condition'
+  nameAttr = 'name'
+
+  title    = resource.ucfirst _ " ( " _ ${resource}.${nameAttr} _ " )"
+%]
+<div class="content">
+
+  [%  INCLUDE layouts/common/header.tt %]
+
+  <div class="container">
+    <div class="row">
+      [%  INCLUDE _flash.tt %]
+
+      <div class="btn-toolbar">
+          [% IF role == 'Admin' %]
+          <a href="/conditions/[% condition.id %]/edit" class="btn btn-primary"><i class="fa fa-edit"></i> Edit</a>
+          <a href="#myModal" data-toggle="modal" class="btn btn-default [% IF jobs.size %]btn-danger[% END %]"><i class="fa fa-trash-o"></i> Delete</a>
+          [% END %]
+          <a href="[% request.uri_for("/conditions")%]" class="btn btn-default"><i class="fa fa-list-alt"></i> List</a>
+      </div>
+
+      <div class="well">
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#condition" data-toggle="tab">Condition</a></li>
+          <li><a href="#status" data-toggle="tab">Status  </a></li>
+          <li><a href="#job" data-toggle="tab">Job  </a></li>
+          <li><a href="#schedule" data-toggle="tab">Schedule  </a></li>
+          <li><a href="#jobs" data-toggle="tab">Jobs  <span class="badge [% IF jobs.size %]alert-danger[% END %]">[% jobs.size %]</span></a></li>
+        </ul>
+
+        <div id="myTabContent" class="tab-content">
+          <div class="tab-pane active in" id="condition">
+            <table class="table table-hover">
+              <tbody>
+                <tr>
+                  <th style="width: 15%">ID</th>
+                  <td>[% condition.id %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Name</th>
+                  <td>[% condition.name %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Description</th>
+                  <td>[% condition.description %]</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="tab-pane fade" id="status">
+            <table class="table table-hover">
+              <tbody>
+                <tr>
+                  <th style="width: 15%">ID</th>
+                  <td>[% status.id %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Name</th>
+                  <td>[% status.name %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Short Name</th>
+                  <td>[% status.shortname %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Description</th>
+                  <td>[% status.description %]</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="tab-pane fade" id="job">
+            <table class="table table-hover">
+              <tbody>
+                <tr>
+                  <th style="width: 15%">ID</th>
+                  <td>[% job.id %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Name</th>
+                  <td>[% job.name %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Alarm if Fail</th>
+                  <td>[% IF job.alarm_if_fail == 1 %]Yes[% ELSE %]No[% END %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Active</th>
+                  <td>[% IF job.active == 1 %]Yes[% ELSE %]No[% END %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Filetrasfer</th>
+                  <td>[% action.name %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Owner</th>
+                  <td>[% owner.firstname %] [% owner.lastname %] ([% owner.email %])</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Description</th>
+                  <td>[% job.description %]</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="schedule">
+            <table class="table table-hover">
+              <tbody>
+                <tr>
+                  <th style="width: 15%">Name</th>
+                  <td>[% schedule.name %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Start Minutes</th>
+                  <td>[% IF schedule.start_mins %][% schedule.start_mins %][% ELSE %]All[% END %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Start Times</th>
+                  <td>[% IF schedule.start_times %][% schedule.start_times %][% ELSE %]All[% END %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Start Week Days</th>
+                  <td>[% IF schedule.start_week_days %][% schedule.start_week_days %][% ELSE %]All[% END %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Start Month Days</th>
+                  <td>[% IF schedule.start_month_days %][% schedule.start_month_days %][% ELSE %]All[% END %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Start Month</th>
+                  <td>[% IF schedule.start_month %][% schedule.start_month %][% ELSE %]All[% END %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Description</th>
+                  <td>[% schedule.description %]</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="jobs">
+            <ul class="nav nav-list">   
+              [% FOREACH job IN jobs %]   
+                <li><a href="/jobs/[% job.id %]">[% job.name %]</a></li> 
+              [% END %]
+            </ul>
+          </div>
+      </div>
+
+    </div>
+
+    [% INCLUDE _delete_modal.tt action="/conditions/${condition.id}/delete" %]
+                
+    </div>
+  </div>
+</div>

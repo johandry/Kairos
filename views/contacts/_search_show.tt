@@ -1,0 +1,22 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>CorpID</th>
+      <th>Name</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    [% FOR contact IN results.contacts # .slice( pager.first - 1, pager.last - 1) %]
+    <tr>
+      <td>[% contact.id %]</td>
+      <td>[% contact.corpid.replace("((?i)$query)", '<b>$1</b>') %]</td>
+      <td><a href="contacts/[% contact.id %]">[% contact.firstname.replace("((?i)$query)", '<b>$1</b>') %] [% contact.lastname.replace("((?i)$query)", '<b>$1</b>') %]</a></td>
+      <td>[% contact.email.replace("((?i)$query)", '<b>$1</b>') %]</td>
+    </tr>
+    [% END %]
+  </tbody>
+</table>
+
+[% # INCLUDE _pagination.tt %]

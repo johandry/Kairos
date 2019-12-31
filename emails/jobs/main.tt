@@ -1,0 +1,20 @@
+<h3 style="color:blue">Job Instance</h3>
+<b>Instance ID:</b> <a href="http://flph068.ffdc.sbc.com/jobinstance/[% jobinstance.id %]/status">[% jobinstance.id %]</a><br/>
+<b>Start Time:</b> [% jobinstance.start_on %]<br/>
+<b>Status:</b> [% jobinstance.status %]<br/>
+<b>End Time:</b> [% jobinstance.end_on %]<br/>
+<b>Exit Code:</b> [% jobinstance.exit_code %]<br/>
+<b>Results:</b> <br/>
+[% jobinstance.results %]<br/>
+<h3 style="color:blue">Job</h3>
+<b>Job Name:</b> <a href="http://flph068.ffdc.sbc.com/jobs/[% job.id %]">[% job.name %]</a><br/>
+<b>Group:</b> [% job.group %]<br/>
+<b>Owner:</b> [% job.owner.firstname %] [% job.owner.lastname %] ([% job.owner.email %])<br/>
+<b>Notification sent to:</b>
+<ul>   
+  [% FOREACH contact IN job.alarm_to %]   
+    <li>[% contact.firstname %] [% contact.lastname %] ([% contact.email %])</li> 
+  [% END %]
+</ul>
+<h3 style="color:blue">Trigger</h3>
+<b>[% trigger.type %]:</b> [% trigger.name %]<br/>

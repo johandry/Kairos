@@ -1,0 +1,107 @@
+<div class="content">
+    
+    <div class="header">
+        <h1 class="page-title">Searches</h1>
+    </div>
+    
+    <ul class="breadcrumb">
+        <li><a href="/">Home</a> </li>
+        <li class="active">Searches</li>
+    </ul>
+
+    <div class="container">
+        <div class="row">
+          [% INCLUDE _flash.tt %]
+          [% # INCLUDE advance_search_forms.tt %]
+          [% IF results.total %]   
+          <div class="well">
+              <ul class="nav nav-tabs">
+                [% IF results.jobinstances.size %]
+                <li class="active"><a href="#jobinstances" data-toggle="tab">Job Instances <span class="badge badge-warning">[% results.jobinstances.size %]</span></a></li>
+                [% END %][% IF results.jobs.size %]
+                <li><a href="#jobs" data-toggle="tab">Jobs <span class="badge badge-warning">[% results.jobs.size %]</span></a></li>
+                [% END %][% IF results.filewatchers.size %]
+                <li><a href="#filewatchers" data-toggle="tab">Filewatchers <span class="badge badge-warning">[% results.filewatchers.size %]</span></a></li>
+                [% END %][% IF results.schedules.size %]
+                <li><a href="#schedules" data-toggle="tab">Schedules <span class="badge badge-warning">[% results.schedules.size %]</span></a></li>
+                [% END %][% IF results.conditions.size %]
+                <li><a href="#conditions" data-toggle="tab">Conditions <span class="badge badge-warning">[% results.conditions.size %]</span></a></li>
+                [% END %][% IF results.commands.size %]
+                <li><a href="#commands" data-toggle="tab">Commands  <span class="badge badge-warning">[% results.commands.size %]</span></a></li>
+                [% END %][% IF results.filetransfers.size %]
+                <li><a href="#filetransfers" data-toggle="tab">File Transfers  <span class="badge badge-warning">[% results.filetransfers.size %]</span></a></li>
+                [% END %][% IF results.containers.size %]
+                <li><a href="#containers" data-toggle="tab">Containers <span class="badge badge-warning">[% results.containers.size %]</span></a></li>
+                [% END %][% IF results.credentials.size %]
+                <li><a href="#credentials" data-toggle="tab">Credentials <span class="badge badge-warning">[% results.credentials.size %]</span></a></li>
+                [% END %][% IF results.machines.size %]
+                <li><a href="#machines" data-toggle="tab">Machines <span class="badge badge-warning">[% results.machines.size %]</span></a></li>
+                [% END %][% IF results.datacenters.size %]
+                <li><a href="#datacenters" data-toggle="tab">Datacenters <span class="badge badge-warning">[% results.datacenters.size %]</span></a></li>
+                [% END %][% IF results.files.size %]
+                <li><a href="#files" data-toggle="tab">Files <span class="badge badge-warning">[% results.files.size %]</span></a></li>
+                [% END %][% IF results.contacts.size %]
+                <li><a href="#contacts" data-toggle="tab">Contacts <span class="badge badge-warning">[% results.contacts.size %]</span></a></li>
+                [% END %][% IF results.teams.size %]
+                <li><a href="#teams" data-toggle="tab">Teams <span class="badge badge-warning">[% results.teams.size %]</span></a></li>
+                [% END %][% IF results.roles.size %]
+                <li><a href="#roles" data-toggle="tab">Roles <span class="badge badge-warning">[% results.roles.size %]</span></a></li>
+                [% END %][% IF results.users.size %]
+                <li><a href="#users" data-toggle="tab">Users <span class="badge badge-warning">[% results.users.size %]</span></a></li>
+                [% END %]
+              </ul>
+              <div id="myTabContent" class="tab-content">
+                <div class="tab-pane active in" id="jobinstances">
+                  [%  INCLUDE jobs/_jobinstances_search_show.tt %] 
+                </div>
+                <div class="tab-pane fade" id="jobs">
+                  [%  INCLUDE jobs/_search_show.tt %]  
+                </div>                
+                <div class="tab-pane fade" id="filewatchers">
+                  [%  INCLUDE filewatchers/_search_show.tt %] 
+                </div>       
+                <div class="tab-pane fade" id="schedules">
+                  [%  INCLUDE schedules/_search_show.tt %] 
+                </div>      
+                <div class="tab-pane fade" id="conditions">
+                  [%  INCLUDE conditions/_search_show.tt %] 
+                </div>   
+                <div class="tab-pane fade" id="commands">
+                  [%  INCLUDE commands/_search_show.tt %] 
+                </div>  
+                <div class="tab-pane fade" id="filetransfers">
+                  [%  INCLUDE filetransfers/_search_show.tt %] 
+                </div>
+                <div class="tab-pane fade" id="containers">
+                  [%  INCLUDE containers/_search_show.tt %] 
+                </div>
+                <div class="tab-pane fade" id="credentials">
+                  [%  INCLUDE credentials/_search_show.tt %] 
+                </div>
+                <div class="tab-pane fade" id="machines">
+                  [%  INCLUDE machines/_search_show.tt %] 
+                </div>      
+                <div class="tab-pane fade" id="datacenters">
+                  [%  INCLUDE machines/_datacenters_search_show.tt %]
+                </div>                 
+                <div class="tab-pane fade" id="files">
+                  [%  INCLUDE files/_search_show.tt %] 
+                </div>      
+                <div class="tab-pane fade" id="contacts">
+                  [%  INCLUDE contacts/_search_show.tt %] 
+                </div>           
+                <div class="tab-pane fade" id="teams">
+                  [%  INCLUDE teams/_search_show.tt %] 
+                </div>  
+                <div class="tab-pane fade" id="roles">
+                  [%  INCLUDE admin/roles/_search_show.tt %] 
+                </div> 
+                <div class="tab-pane fade" id="users">
+                  [%  INCLUDE admin/users/_search_show.tt %] 
+                </div>                                                                          
+              </div>
+          [% END %]
+          
+        </div>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+
+<div style="padding-top: 15px;">
+  <!-- Name -->
+  <div class="form-group">
+    <div class="col-md-1"></div>
+    <div class="col-md-3" style="padding-left: 0px;">
+      <input type="text" name="name" id="name" value="[% job.name %]" class="form-control" placeholder="Job name" required autofocus>
+    </div>
+  </div>
+
+  <!-- Group -->
+  <div class="form-group">
+    <div class="col-md-1"></div>
+    <div class="col-md-3" style="padding-left: 0px;">
+      <input type="text" name="group_name" id="group_name" value="[% job.group.name %]" class="form-control" placeholder="Group" data-provide="typeahead" data-items="10" autocomplete="off" data-source='["[% groups.0.name %]"[% FOREACH group IN groups %][% NEXT IF groups.index == 0 %],"[% group.name %]"[% END %] ]'>
+    </div>
+  </div>
+
+  <!-- Owner -->
+  <div class="form-group">
+    <div class="col-md-1"></div>
+    <div class="input-group col-md-3" style="padding-left: 0px;" >
+      <select name="contact_id" id="contact_id" class="selectpicker form-control" data-live-search="true" data-size="5" data-header="Select a Owner">
+        [% FOREACH contact IN contacts %]
+        <option value="[% contact.id %]" [% IF contact.id == job.contact_id %]selected[% END %]>[% contact.firstname %] [% contact.lastname %]([% contact.email %])</option>
+        [% END %]
+      </select>
+      <span class="input-group-addon"><a href="/contacts/new">New</a></span>
+    </div>
+  </div>
+
+  <!-- Description -->
+  <div class="form-group">
+    <div class="col-md-1"></div>
+    <div class="col-md-3" style="padding-left: 0px;">
+      <textarea name="description" value="[% job.description %]" rows="3" class="form-control">[% job.description %]</textarea>
+    </div>
+  </div>
+
+  <!-- Active -->
+  <div class="form-group">
+    <div class="col-md-1"></div>
+    <div class="checkbox col-md-3">
+      <input type="checkbox" name="active" value="1" [% IF job.active == 1 %]checked[% END %]> Active
+    </div>
+    
+  </div>
+</div>

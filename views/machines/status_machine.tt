@@ -1,0 +1,72 @@
+[%  INCLUDE machines/_header.tt 
+    title = "Monitoring (${machine.hostname}.${machine.domainname})"
+%]
+                    
+<div class="btn-toolbar">
+  <div class="btn-group">
+  <a href="[% request.uri_for("/monitor")%]" class="btn"><i class="fa fa-list-alt"></i> All Machines</a>
+  </div>
+</div>
+  <div class="well">
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#machine" data-toggle="tab">Machine</a></li>
+      <li><a href="#servicestats" data-toggle="tab">Services Status <span class="badge [% IF machine.status == 'CRITICAL' %]badge-important[% ELSIF machine.status == 'OK' %]badge-success[% ELSIF machine.status == 'WARNING' %]badge-warning[% ELSE %] [% END %]">[% machine.services.size %]</span></a></li>
+      <li><a href="#servicegraphs" data-toggle="tab">Services Graphics</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+      <div class="tab-pane active in" id="machine">
+        <dl class="dl-horizontal">
+          <dt>ID</dt><dd>[% machine.id %]</dd>
+          <dt>Status</dt><dd><span class="label [% IF machine.status == 'CRITICAL' %]label-danger[% ELSIF machine.status == 'OK' %]label-success[% ELSIF machine.status == 'WARNING' %]label-warning[% ELSE %] [% END %]">[% machine.status %]</span></dd>
+          <dt>Hostname</dt><dd>[% machine.hostname %]</dd>
+          <dt>Domain</dt><dd>[% machine.domainname %]</dd>
+          <dt>IP</dt><dd>[% machine.ip %]</dd>
+          <dt>Description</dt><dd>[% machine.description %]</dd>
+        </dl>
+      </div>
+      <div class="tab-pane fade" id="servicestats">
+      [% IF machine.services.size %]
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Service</th>
+              <th>Status</th>
+              <th>Last Check</th>
+              <th>Status Info</th>
+            </tr>
+          </thead>
+          <tbody>
+            [% FOR service IN machine.services %]
+            <tr [% IF service.status == 'CRITICAL' %]class="error"[% ELSIF service.status == 'WARNING' %]class="warning"[% END %]>
+              <td>[% service.name %]</td>
+              <td><span class="label [% IF service.status == 'CRITICAL' %]label-danger[% ELSIF service.status == 'OK' %]label-success[% ELSIF service.status == 'WARNING' %]label-warning[% ELSE %] [% END %]">[% service.status %]</span></a></td>
+              <td>[% service.lastcheck %]</td>
+              <td>[% service.statusinfo %]</td>
+            </tr>
+            [% END %]                
+          </tbody>
+        </table>
+      [% END %]
+      </div>
+      <div class="tab-pane fade" id="servicegraphs">
+        [% FOR service IN machine.services %]
+        <div class="block">
+            <a href="#widgegraph[% service.name %]" class="block-heading" data-toggle="collapse">[% service.title %] <span class="label [% IF service.status == 'CRITICAL' %]label-danger[% ELSIF service.status == 'OK' %]label-success[% ELSIF service.status == 'WARNING' %]label-warning[% ELSE %] [% END %]">[% service.status %]</span></a>
+            <div id="widgegraph[% service.name %]" class="block-body collapse in">   
+              [% FOR img IN service.img %]  
+                <div style="display: block; margin: 5px; padding: 0;"><img src="[% img %]"></div>
+              [% END %]
+            </div>
+        </div>                                    
+        [% END %] 
+      </div>
+  </div>
+
+</div>
+
+[% INCLUDE _delete_modal.tt action="/machines/${machine.id}/delete" %]
+
+                
+        </div>
+    </div>
+</div>

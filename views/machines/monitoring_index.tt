@@ -1,0 +1,47 @@
+<div class="content">
+    
+    <div class="header">
+        <h1 class="page-title">Monitoring</h1>
+    </div>
+    
+    <ul class="breadcrumb">
+        <li><a href="/">Home</a> </li>
+        <li class="active">Monitoring</li>
+    </ul>
+
+    <div class="container">
+        <div class="row">
+          [% INCLUDE _flash.tt %]
+          [% IF role == 'Admin' %]          
+          <div class="btn-toolbar">
+              <button class="btn"><i class="fa fa-cloud-download"></i> Export</button>
+            <div class="btn-group">
+            </div>
+          </div>
+          [% END %]
+          <div class="well">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Host</th>
+                    <th>IP</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  [% FOR machine IN machines %]
+                  <tr [% IF machine.status == 'CRITICAL' %]class="error"[% ELSIF machine.status == 'WARNING' %]class="warning"[% END %]>
+                    <td>[% machine.id %]</td>
+                    <td><a href="machines/[% machine.id %]/status">[% machine.host %]</a></td>
+                    <td>[% machine.ip %]</td>
+                    <td><span class="label [% IF machine.status == 'CRITICAL' %]label-danger[% ELSIF machine.status == 'OK' %]label-success[% ELSIF machine.status == 'WARNING' %]label-warning[% ELSE %] [% END %]">[% machine.status %]</span></td>
+                  </tr>
+                  [% END %]                
+                </tbody>
+              </table>
+          </div>
+          
+        </div>
+    </div>
+</div>

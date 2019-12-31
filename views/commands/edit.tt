@@ -1,0 +1,9 @@
+[% 
+  resource = 'command'
+  nameAttr = 'name'
+
+  path     = "${resource}s"
+  title    = "Edit " _ resource.ucfirst _ " ( " _ ${resource}.${nameAttr} _ " )"
+  url      = request.uri_for("/${resource}s/" _ ${resource}.id )
+%]
+[% INCLUDE layouts/common/edit.tt %]

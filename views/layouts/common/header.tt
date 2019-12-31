@@ -1,0 +1,9 @@
+<div class="header">
+  <h1 class="page-title">[% title %]</h1>
+</div>
+
+<ul class="breadcrumb">
+  <li><a href="/">Home</a> </li>
+  <li><a href="[% request.uri_for("/${resource}s")%]">[% resource | ucfirst %]s</a> </li>
+  <li class="active">[% title %]</li>
+</ul>

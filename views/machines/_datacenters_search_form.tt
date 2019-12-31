@@ -1,0 +1,16 @@
+<input type="hidden" name="id" id="id" value="[% machine.id %]">
+<label>Host Name</label>
+<input type="text" name="hostname" id="hostname" value="[% machine.hostname %]" class="input-xlarge">
+<label>Domain Name</label>
+<input type="text" name="domainname" id="domainname" value="[% machine.domainname %]" class="input-xlarge">
+<label>IP</label>
+<input type="text" name="ip" id="ip" value="[% machine.ip %]" class="input-xlarge">
+<label>Datacenter</label>
+<select name="dc_id" id="dc_id" class="input-xlarge">
+  <option value="0">-- Select a Datacenter --</option>\
+  [% FOREACH datacenter IN datacenters %]
+  <option value="[% datacenter.id %]" [% IF datacenter.id == machine.dc_id %]selected[% END %]>[% datacenter.name %]</option>
+  [% END %]
+</select>
+<label>Description</label>
+<textarea name="description" value="[% machine.description %]" rows="3" class="input-xlarge">[% machine.description %]</textarea>

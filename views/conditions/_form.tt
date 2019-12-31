@@ -1,0 +1,69 @@
+<input type="hidden" name="id" id="id" value="[% condition.id %]">
+
+<div class="form-group">
+  <label class="control-label col-md-2" for="name">Name</label>
+  <div class="col-md-6" style="padding-left: 0px;">
+    <p name="name" class="form-control-static"><b>[% condition.name %]</b></p>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="control-label col-md-2" for="status_id">Status</label>
+  <div class="col-md-3" style="padding-left: 0px;">
+  <select name="status_id" id="status_id" class="selectpicker form-control col-md-3" data-live-search="true" data-size="5" data-header="Select a Status" required>
+    [% FOREACH status IN statuses %]
+    <option value="[% status.id %]" [% IF status.id == condition.status_id %]selected[% END %] data-subtext="[% status.shortname %]">[% status.name %]</option>
+    [% END %]
+  </select>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="control-label col-md-2" for="job_id">Job</label>
+  <div class="col-md-3" style="padding-left: 0px;">
+    <select name="job_id" id="job_id" class="selectpicker form-control col-md-3" data-live-search="true" data-size="5" data-header="Select a Job" required>
+      [% FOREACH job IN jobs %]
+      <option value="[% job.id %]" [% IF job.id == condition.job_id %]selected[% END %]>[% job.name %]</option>
+      [% END %]
+    </select>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="control-label col-md-2" for="schedule_id">Schedule</label>
+  <div class="col-md-3" style="padding-left: 0px;">
+    <select name="schedule_id" id="schedule_id" class="selectpicker form-control" data-live-search="true" data-size="5" data-header="Select a Schedule" required>
+      [% FOREACH schedule IN schedules %]
+      <option value="[% schedule.id %]" [% IF schedule.id == condition.schedule_id %]selected[% END %]>[% schedule.name %]</option>
+      [% END %]
+    </select>
+  </div>
+  <div class="col-md-3">
+    <a href="/schedules/new" class="control-label btn btn-default">Create a Schedule</a>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="control-label col-md-2" for="description">Description</label>
+  <div class="col-md-3" style="padding-left: 0px;">
+    <textarea name="description" value="[% condition.description %]" rows="3" class="form-control">[% condition.description %]</textarea>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('.selectpicker').selectpicker({
+    showSubtext: true
+  });
+
+  $('select[name=status_id]').change( function () {
+    $('p[name=name]').html( '<b>' + $('select[name=status_id] option:selected').attr('data-subtext') + '(' + $('select[name=job_id] option:selected').text() + ')#'+ $('select[name=schedule_id] option:selected').text() + '</b>');
+  });
+
+  $('select[name=job_id]').change( function () {
+    $('p[name=name]').html( '<b>' + $('select[name=status_id] option:selected').attr('data-subtext') + '(' + $('select[name=job_id] option:selected').text() + ')#'+ $('select[name=schedule_id] option:selected').text() + '</b>');
+  });
+
+  $('select[name=schedule_id]').change( function () {
+    $('p[name=name]').html( '<b>' + $('select[name=status_id] option:selected').attr('data-subtext') + '(' + $('select[name=job_id] option:selected').text() + ')#'+ $('select[name=schedule_id] option:selected').text() + '</b>');
+  });
+</script>

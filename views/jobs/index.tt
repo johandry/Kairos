@@ -1,0 +1,95 @@
+<div class="content">
+    
+    <div class="header">
+        
+        <h1 class="page-title">Jobs</h1>
+    </div>
+    
+    <ul class="breadcrumb">
+        <li><a href="/">Home</a> </li>
+        <li class="active">Jobs</li>
+    </ul>
+
+    <div class="container">
+        <div class="row">
+          [%  INCLUDE _flash.tt %] 
+          <div class="btn-toolbar">
+            <div class="btn-group">
+              [% IF role == 'Admin' %] <a href="[% request.uri_for("/jobs/new")%]" class="btn btn-primary"><i class="fa fa-plus"></i> New Job</a> [% END %]
+            </div>
+            
+            <div class="btn-group">
+              [% IF role == 'Admin' %]
+              <div class="btn-group">
+                <button type="submit" id="import" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                  <i class="fa fa-cloud-upload"></i> Import
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a href="[% request.uri_for("/jobs/import/xls")%]">Excel</a></li>
+                  <li><a href="[% request.uri_for("/jobs/import/csv")%]">CSV</a></li>
+                </ul>
+              </div>
+              [% END %]
+              <input type="hidden" name="action" id="action" value="export">
+              <div class="btn-group">
+                <button type="submit" id="export" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                  <i class="fa fa-cloud-download"></i> Export
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a href="[% request.uri_for("/jobs/export/xls")%]">Excel</a></li>
+                  <li><a href="[% request.uri_for("/jobs/export/csv")%]">CSV</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="well">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Group</th>
+                    <th>Action</th>
+                    <th>Trigger</th>
+                    <th>Owner</th>
+                    <th style="width: 26px;"></th>
+                    <th style="width: 26px;"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  [% FOR job IN jobs.slice( pager.first - 1, pager.last - 1) %]
+                  <tr>
+                    <td>[% job.id %]</td>
+                    <td><a href="jobs/[% job.id %]">[% job.name %]</a></td>
+                    <td>[% job.group %]</td>
+                    <td>[% job.action %]</td>
+                    <td>[% job.trigger_type %]</td>
+                    <td>[% job.contact %]</td>
+                    <td>
+                      [% IF role == 'Admin' %]
+                      <a href="jobs/[% job.id %]/run"><i class="fa fa-play"></i></a>
+                      [% END %]
+                    </td>
+                    <td>
+                      [% IF role == 'Admin' %]
+                        <a href="jobs/[% job.id %]/edit"><i class="fa fa-pencil"></i></a>
+                        <a href="#myModal" role="button" data-toggle="modal"><i class="fa fa-remove"></i></a>
+                      [% END %]
+                    </td>
+                  </tr>
+                  [% END %]
+                </tbody>
+              </table>
+          </div>
+          [% INCLUDE _pagination.tt %]
+
+          [% INCLUDE _delete_modal.tt action="/jobs/${job.id}/delete" %]
+          
+                
+        </div>
+    </div>
+</div>

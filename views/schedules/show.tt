@@ -1,0 +1,106 @@
+[% 
+  resource = 'schedule'
+  nameAttr = 'name'
+
+  title    = resource.ucfirst _ " ( " _ ${resource}.${nameAttr} _ " )"
+%]
+<div class="content">
+
+  [%  INCLUDE layouts/common/header.tt %]
+
+  <div class="container">
+    <div class="row">
+      [%  INCLUDE _flash.tt %]
+
+      <div class="btn-toolbar">
+          [% IF role == 'Admin' %]
+          <a href="/schedules/[% schedule.id %]/edit" class="btn btn-primary"><i class="fa fa-edit"></i> Edit</a>
+          <a href="#myModal" data-toggle="modal" class="btn btn-default [% IF (jobs.size + filewatchers.size + conditions.size) %]btn-danger[% END %]"><i class="fa fa-trash-o"></i> Delete</a>
+          [% END %]
+          <a href="[% request.uri_for("/schedules")%]" class="btn btn-default"><i class="fa fa-list-alt"></i> List</a>
+      </div>
+
+      <div class="well">
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#schedule" data-toggle="tab">Schedule</a></li>
+          <li><a href="#jobs" data-toggle="tab">Jobs  <span class="badge [% IF jobs.size %]alert-danger[% END %]">[% jobs.size %]</span></a></li>
+          <li><a href="#filewatchers" data-toggle="tab">Filewatchers  <span class="badge [% IF filewatchers.size %]alert-danger[% END %]">[% filewatchers.size %]</span></a></li>
+          <li><a href="#conditions" data-toggle="tab">Conditions  <span class="badge [% IF conditions.size %]alert-danger[% END %]">[% conditions.size %]</span></a></li>
+        </ul>
+
+        <div id="myTabContent" class="tab-content">
+          <div class="tab-pane active in" id="schedule">
+            <table class="table table-hover">
+              <tbody>
+                <tr>
+                  <th style="width: 15%">ID</th>
+                  <td>[% schedule.id %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Name</th>
+                  <td>[% schedule.name %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Minutes</th>
+                  <td>[% schedule.Dminutes %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Hours</th>
+                  <td>[% schedule.Dhours %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Day of Month</th>
+                  <td>[% schedule.Dmonth_days %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Month</th>
+                  <td>[% schedule.Dmonths %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Day of Week</th>
+                  <td>[% schedule.Dweek_days %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Description</th>
+                  <td>[% schedule.description %]</td>
+                </tr>
+                <tr>
+                  <th style="width: 15%">Crontab Format</th>
+                  <td>[% crontab %]</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="tab-pane fade" id="jobs">
+            <ul class="nav nav-list">   
+              [% FOREACH job IN jobs %]   
+                <li><a href="/jobs/[% job.id %]">[% job.name %]</a></li> 
+              [% END %]
+            </ul>
+          </div>
+
+          <div class="tab-pane fade" id="filewatchers">
+            <ul class="nav nav-list">   
+              [% FOREACH filewatcher IN filewatchers %]   
+                <li><a href="/filewatchers/[% filewatcher.id %]">[% filewatcher.name %]</a></li> 
+              [% END %]
+            </ul>
+          </div>
+
+          <div class="tab-pane fade" id="conditions">
+            <ul class="nav nav-list">   
+              [% FOREACH condition IN conditions %]   
+                <li><a href="/conditions/[% condition.id %]">[% condition.name %]</a></li> 
+              [% END %]
+            </ul>
+          </div>
+          
+        </div>
+      </div>
+
+      [% INCLUDE _delete_modal.tt action="/schedules/${schedule.id}/delete" %]
+
+    </div>
+  </div>
+</div>

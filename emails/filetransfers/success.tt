@@ -1,0 +1,8 @@
+<h2 style="color:blue">Filetransfer execution <span style="color:green">successful</span>.</h2>
+[%  INCLUDE jobs/main.tt  %]
+<h3 style="color:blue">Action</h3>
+<b>Protocol:</b> [% action.protocol %] <br/>
+<b>Source:</b> [% action.source %] <br/>
+<b>Target:</b> [% action.target %] <br/>
+<br/>
+[% message %]

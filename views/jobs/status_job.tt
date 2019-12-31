@@ -1,0 +1,59 @@
+<div class="content"> 
+  <div class="header">
+    <h1 class="page-title">Job Status ([% job.name %])</h1>
+  </div>
+    
+  <ul class="breadcrumb">
+    <li><a href="/">Home</a> </li>
+    <li><a href="[% request.uri_for("/jobs")%]">Jobs</a> </li>
+    <li class="active">Job Status ([% job.name %])</li>
+  </ul>
+
+  <div class="container">
+    <div class="row">
+      [%  INCLUDE _flash.tt %]
+                    
+      <div class="btn-toolbar">
+        <div class="btn-group">
+          <a href="/jobs/[% job.id %]" class="btn btn-primary"><i class="fa fa-wrench"></i> View Job</a>
+        </div>
+        <div class="btn-group">
+          <a href="[% request.uri_for("/jobs")%]" class="btn btn-default"><i class="fa fa-list-alt"></i> List</a>
+        </div>
+        [% IF role == 'Admin' %]
+        <div class="btn-group">
+          <button class="btn btn-default"><i class="fa fa-cloud-upload"></i> Import</button>
+          <button class="btn btn-default"><i class="fa fa-cloud-download"></i> Export</button>
+        </div>
+        [% END %]
+      </div>
+      <div class="well">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Start On</th>
+              <th>Status</th>
+              <th>End On</th>
+              <th>Exit Code</th>
+              <th>Results</th>
+            </tr>
+          </thead>
+          <tbody>
+            [% FOR jobinstance IN jobinstances.slice( pager.first - 1, pager.last - 1) %]
+            <tr>
+              <td><a href="/jobinstance/[% jobinstance.id %]/status">[% jobinstance.id %]</a></td>
+              <td>[% jobinstance.start_on %]</td>
+              <td><span class="label [% IF jobinstance.status == 'FAILURE' %]label-danger[% ELSIF jobinstance.status == 'SUCCESS' %]label-success[% ELSIF jobinstance.status == 'RUNNING' %]label-info[% ELSE %] [% END %]">[% jobinstance.status %]</span></td>
+              <td>[% jobinstance.end_on %]</td>
+              <td>[% jobinstance.exit_code %]</td>
+              <td>[% jobinstance.results %]</td>
+            </tr>
+            [% END %]
+          </tbody>
+        </table>
+      </div>
+      [% INCLUDE _pagination.tt %]   
+    </div>
+  </div>
+</div>

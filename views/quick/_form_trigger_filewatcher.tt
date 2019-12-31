@@ -1,0 +1,43 @@
+<div class="form-group">
+  <div class="col-md-1" ></div>
+  <div class="col-md-3" style="padding-left: 0px;">
+      <select name="filewatcher_credential_id" id="filewatcher_credential_id" class="selectpicker form-control" data-live-search="true" data-size="5" data-header="Select a Credential">
+        [% FOREACH credential IN credentials %]
+        <option value="[% credential.id %]" [% IF credential.id == filewatcher_credential_id %]selected[% END %]>[% credential.username %]</option>
+        [% END %]
+      </select>
+  </div>
+  <div class="col-md-3" style="padding-left: 0px;">
+      <select name="filewatcher_machine_id" id="filewatcher_machine_id" class="selectpicker form-control" data-live-search="true" data-size="5" data-header="Select a Machine">
+        [% FOREACH machine IN machines %]
+        <option value="[% machine.id %]" [% IF machine.id == filewatcher_machine_id %]selected[% END %]>[% machine.hostname %].[% machine.domainname %] ([% machine.ip %])</option>
+        [% END %]
+      </select>
+  </div>
+  <div class="col-md-3" style="padding-left: 0px;">
+    <input type="text" name="filewatcher_file_name" id="filewatcher_file_name" value="[% container_file.name %]" class="form-control" placeholder="File to watch" data-provide="typeahead" data-items="4" autocomplete="off" data-source='["[% files.0.name %]"[% FOREACH file IN files %][% NEXT IF files.index == 0 %],"[% file.name %]"[% END %]]'>
+  </div>
+</div>
+
+<!-- Schedule to watch the file: -->
+<div class="form-group">
+  <div class="col-md-1"></div>
+  <div class="col-md-3" style="padding-left: 0px;">
+    <div class="input-group">
+      <select name="filewatcher_schedule_id" id="filewatcher_schedule_id" class="selectpicker form-control" data-live-search="true" data-size="5" data-header="Select a Schedule" disabled>
+        [% FOREACH sch IN schedules %]
+        <option value="[% sch.id %]" [% IF sch.id == schedule_id %]selected[% END %]>[% sch.description %] ([% sch.name %])</option>
+        [% END %]
+      </select>
+      <span class="input-group-btn"><button id="change_filewatcher_schedule" class="btn btn-default" type="button">Change</button></span>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('#change_filewatcher_schedule').click(function() {
+      $('#filewatcher_schedule_id').prop('disabled', false );
+      $('#filewatcher_schedule_id').selectpicker('refresh');
+  });
+  // $('.filewatcher_schedule_id').prop('disabled')
+</script>

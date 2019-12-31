@@ -1,0 +1,65 @@
+<div class="content">
+    
+    <div class="header">
+        
+        <h1 class="page-title">Machines</h1>
+    </div>
+    
+    <ul class="breadcrumb">
+        <li><a href="/">Home</a> </li>
+        <li class="active">Machines</li>
+    </ul>
+
+    <div class="container">
+        <div class="row">
+          [%  INCLUDE _flash.tt %]
+          [% IF role == 'Admin' %]          
+          <div class="btn-toolbar">
+            <div class="btn-group">
+              <a href="[% request.uri_for("/machines/new")%]" class="btn btn-primary"><i class="fa fa-plus"></i> New Machine</a>
+            </div>
+            <div class="btn-group">
+              <button class="btn btn-default"><i class="fa fa-cloud-upload"></i> Import</button>
+              <button class="btn btn-default"><i class="fa fa-cloud-download"></i> Export</button>
+            </div>
+          </div>
+          [% END %]
+          <div class="well">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Hostname</th>
+                    <th>Domain</th>
+                    <th>IP</th>
+                    <th>Datacenter</th>
+                    <th style="width: 26px;"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  [% FOR machine IN machines.slice( pager.first - 1, pager.last - 1) %]
+                  <tr>
+                    <td>[% machine.id %]</td>
+                    <td><a href="machines/[% machine.id %]">[% machine.hostname %]</a></td>
+                    <td>[% machine.domainname %]</td>
+                    <td>[% machine.ip %]</td>
+                    <td>[% machine.dc %]</td>
+                    <td>
+                      [% IF role == 'Admin' %]
+                        <a href="machines/[% machine.id %]/edit"><i class="fa fa-pencil"></i></a>
+                        <a href="#myModal" role="button" data-toggle="modal"><i class="fa fa-remove"></i></a>
+                      [% END %]
+                    </td>
+                  </tr>
+                  [% END %]                
+                </tbody>
+              </table>
+          </div>
+          [% INCLUDE _pagination.tt %]
+          [% INCLUDE _delete_modal.tt action="/machines/${machine.id}/delete" %]
+
+          
+                
+        </div>
+    </div>
+</div>

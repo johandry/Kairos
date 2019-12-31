@@ -1,0 +1,28 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Job</th>
+      <th>Group</th>
+      <th>Status</th>
+      <th>Started On</th>
+      <th>Finished On</th>
+      <!-- <th>Results</th> -->
+    </tr>
+  </thead>
+  <tbody>
+    [% FOR jobinstance IN results.jobinstances # .slice( pager.first - 1, pager.last - 1) %]
+    <tr>
+      <td><a href="jobinstance/[% jobinstance.id %]/status">[% jobinstance.id %]</a></td>
+      <td>[% jobinstance.job_name.replace("((?i)$query)", '<b>$1</b>') %]</td>
+      <td>[% jobinstance.group.replace("((?i)$query)", '<b>$1</b>') %]</td>
+      <td><span class="label [% IF jobinstance.status == 'FAILURE' %]label-danger[% ELSIF jobinstance.status == 'SUCCESS' %]label-success[% ELSIF jobinstance.status == 'RUNNING' %]label-info[% ELSE %] [% END %]">[% jobinstance.status.replace("((?i)$query)", '<b>$1</b>') %]</span></td>
+      <td>[% jobinstance.start_on.replace("((?i)$query)", '<b>$1</b>') %]</td>
+      <td>[% jobinstance.end_on.replace("((?i)$query)", '<b>$1</b>') %]</td>
+      <!-- <td>[% jobinstance.results.replace("((?i)$query)", '<b>$1</b>') %]</td> -->
+    </tr>
+    [% END %]
+  </tbody>
+</table>
+
+[% # INCLUDE _pagination.tt %]

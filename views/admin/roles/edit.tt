@@ -1,0 +1,12 @@
+[% 
+  resource = 'role'
+  nameAttr = 'name'
+
+  # The token for the logged user role is 'role' so the variable with the role to edit is 'arole'
+  # The path is admin/roles
+
+  path     = "admin/${resource}s"
+  title    = "Edit " _ resource.ucfirst _ " ( " _ arole.${nameAttr} _ " )"
+  url      = request.uri_for("/${resource}s/" _ arole.id )
+%]
+[% INCLUDE layouts/common/edit.tt %]

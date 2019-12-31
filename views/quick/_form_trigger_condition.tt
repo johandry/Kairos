@@ -1,0 +1,32 @@
+  <!-- Status -->
+  <label></label>
+  <select name="status_id" id="status_id" class="input-medium">
+    <option value="0"> Status </option>\
+    [% FOREACH status IN statuses %]
+    <option value="[% status.id %]" [% IF status.id == condition.status_id %]selected[% END %]>[% status.name %] [[% status.shortname %]]</option>
+    [% END %]
+  </select>
+  <!-- Job -->
+  <select name="job_id" id="job_id" class="input-medium">
+    <option value="0"> Job </option>\
+    [% FOREACH job IN jobs %]
+    <option value="[% job.id %]" [% IF job.id == condition.job_id %]selected[% END %]>[% job.name %]</option>
+    [% END %]
+  </select>
+  <!-- Schedule -->
+  <!-- <label>Schedule to check the job status:</label> -->
+  <label></label>
+  <div class="input-append">
+    <span class="input-xlarge uneditable-input">Check Schedule: [% default_schedule.description %]</span>
+    <span class="add-on"><a href="#set_condition_schedule" data-toggle="tab">Change</a></span>
+  </div>
+
+  <div class="input-append tab-pane fade" id="set_condition_schedule">
+  <select name="condition_schedule_id" id="condition_schedule_id" class="input-xlarge">
+    <option value="0"> Schedule </option>
+    [% FOREACH sch IN schedules %]
+    <option value="[% sch.id %]" [% IF sch.id == schedule_id %]selected[% END %]>[% sch.description %] ([% sch.name %])</option>
+    [% END %]
+  </select>
+  <!-- <span class="add-on"><a href="#new_schedule" data-toggle="tab">New</a></span> -->
+</div>

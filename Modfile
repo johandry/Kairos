@@ -1,0 +1,25 @@
+#!/bin/bash
+
+yum install gmp.x86_64 gmp-devel.x86_64 perl-Math-GMP.x86_64
+
+cpanm Dancer
+cpanm Dancer::Plugin::Database
+cpanm Dancer::Plugin::FlashMessage
+cpanm Template
+cpanm Task::Plack
+cpanm Crypt::SaltedHash
+cpanm Net::SCP
+cpanm Net::SCP::Expect
+cpanm Net::SFTP::Foreign
+cpanm Net::FTP
+cpanm Net::SSH2
+cpanm Data::SpreadPagination
+cpanm Dancer::Session::Cookie
+cpanm Dancer::Plugin::Email
+cpanm Text::CSV
+cpanm Spreadsheet::WriteExcel
+cpanm JSON
+
+#pack font-awesome,http://fortawesome.github.io/Font-Awesome/assets/font-awesome.zip
+#pack fullcalendar,https://github.com/arshaw/fullcalendar/releases/download/v1.6.4/fullcalendar-1.6.4.zip
+#pack bootstrap,https://github.com/twbs/bootstrap/releases/download/v3.0.0/bootstrap-3.0.0-dist.zip

@@ -1,0 +1,89 @@
+<div class="form-group">
+  <label class="control-label col-md-2" for="minutes">Minutes</label>
+  <div class="col-md-3" style="padding-left: 0px;">
+    <input type="text" name="minutes" id="minutes" value="[% schedule.minutes %]" class="form-control" data-toggle="tooltip" data-placement="bottom" title="Which minutes (comma-separated list of minutes or every N minutes (*/N) or Empty for every minute) the job should be started every hour." placeholder="0,15,30,45 OR */15 OR Empty">
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="control-label col-md-2" for="hours">Hours</label>
+  <div class="col-md-3" style="padding-left: 0px;">
+    <input type="text" name="hours" id="hours" value="[% schedule.hours %]" class="form-control" data-toggle="tooltip" data-placement="bottom" title="Which hours (comma-separated list of hours or every N hours (*/N) or Empty for every hour) the job should be started in a day." placeholder="0,8,16 OR */8 OR Empty for every hour">
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="control-label col-md-2" for="month_days">Day of Month</label>
+  <div class="col-md-3" style="padding-left: 0px;">
+    <input type="text" name="month_days" id="month_days" value="[% schedule.month_days %]" class="form-control" data-toggle="tooltip" data-placement="bottom" title="Which day the job should be started in a month. This is a comma-separated list of days or leave it empty for every day." placeholder="1,16 OR Empty for every day">
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="control-label col-md-2" for="system">Month</label>
+  <div class="col-md-9">
+    <div class="checkbox-inline">
+      <p><input type="checkbox" name="months" id="months" value="1" [% IF schedule.months.Jan %]checked[% END %]> Jan</p>
+    </div>
+    <div class="checkbox-inline">
+      <p><input type="checkbox" name="months" id="months" value="2" [% IF schedule.months.Feb %]checked[% END %]> Feb</p>
+    </div>
+    <div class="checkbox-inline">
+      <p><input type="checkbox" name="months" id="months" value="3" [% IF schedule.months.Mar %]checked[% END %]> Mar</p>
+    </div>
+    <div class="checkbox-inline">
+      <p><input type="checkbox" name="months" id="months" value="4" [% IF schedule.months.Apr %]checked[% END %]> Apr</p>
+    </div>
+    <div class="checkbox-inline">
+      <p><input type="checkbox" name="months" id="months" value="5" [% IF schedule.months.May %]checked[% END %]> May</p>
+    </div>
+    <div class="checkbox-inline">
+      <p><input type="checkbox" name="months" id="months" value="6" [% IF schedule.months.Jun %]checked[% END %]> Jun</p>
+    </div>                    
+    <div class="checkbox-inline">
+      <p><input type="checkbox" name="months" id="months" value="7" [% IF schedule.months.Jul %]checked[% END %]> Jul</p>
+    </div>
+    <div class="checkbox-inline">
+      <p><input type="checkbox" name="months" id="months" value="8" [% IF schedule.months.Aug %]checked[% END %]> Aug</p>
+    </div>
+    <div class="checkbox-inline">
+      <p><input type="checkbox" name="months" id="months" value="9" [% IF schedule.months.Sep %]checked[% END %]> Sep</p>
+    </div>
+    <div class="checkbox-inline">
+      <p><input type="checkbox" name="months" id="months" value="10" [% IF schedule.months.Oct %]checked[% END %]> Oct</p>
+    </div>
+    <div class="checkbox-inline">
+      <p><input type="checkbox" name="months" id="months" value="11" [% IF schedule.months.Nov %]checked[% END %]> Nov</p>
+    </div>
+    <div class="checkbox-inline">
+      <p><input type="checkbox" name="months" id="months" value="12" [% IF schedule.months.Dec %]checked[% END %]> Dec</p>
+    </div>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="control-label col-md-2" for="system">Day of Week</label>
+  <div class="col-md-9">
+    <div class="checkbox-inline">
+      <p><input type="checkbox" name="week_days" id="week_days" value="0" [% IF schedule.week_days.Sun %]checked[% END %]> Sun</p>
+    </div>
+    <div class="checkbox-inline">
+      <p><input type="checkbox" name="week_days" id="week_days" value="1" [% IF schedule.week_days.Mon %]checked[% END %]> Mon</p>
+    </div>
+    <div class="checkbox-inline">
+      <p><input type="checkbox" name="week_days" id="week_days" value="2" [% IF schedule.week_days.Tue %]checked[% END %]> Tue</p>
+    </div>
+    <div class="checkbox-inline">
+      <p><input type="checkbox" name="week_days" id="week_days" value="3" [% IF schedule.week_days.Wed %]checked[% END %]> Wed</p>
+    </div>
+    <div class="checkbox-inline">
+      <p><input type="checkbox" name="week_days" id="week_days" value="4" [% IF schedule.week_days.Thu %]checked[% END %]> Thr</p>
+    </div>
+    <div class="checkbox-inline">
+      <p><input type="checkbox" name="week_days" id="week_days" value="5" [% IF schedule.week_days.Fri %]checked[% END %]> Fri</p>
+    </div>
+    <div class="checkbox-inline">
+      <p><input type="checkbox" name="week_days" id="week_days" value="6" [% IF schedule.week_days.Sat %]checked[% END %]> Sat</p>
+    </div>
+  </div>
+</div>

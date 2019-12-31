@@ -1,0 +1,39 @@
+<div style="padding-top: 15px;">
+
+  <div class="form-group">
+    <div class="col-md-2"></div>  
+    <div class="btn-group col-md-3" data-toggle="buttons" style="padding-left: 0px;">
+      <label class="btn btn-primary active">
+        <input type="radio" name="job_type_options" checked id="option1"><a href="#filetransfer" data-toggle="tab" id="f" style="color: white;">File Transfer</a>
+      </label>
+      <label class="btn btn-primary">
+        <input type="radio" name="job_type_options" id="option2"><a href="#command" data-toggle="tab" id="c" style="color: white;">Command</a>
+      </label>
+    </div>
+  </div>
+
+  <input type="hidden" name="job_type" id="job_type" value="f">
+  <script type="text/javascript">
+    $('#f').click(function(event) {
+      $('#job_type').val("f")
+    });
+    $('#c').click(function(event) {
+      $('#job_type').val("c")
+    });
+  </script>
+  
+  <div id="myTabContent" class="tab-content">
+
+    <!-- File Transfer -->
+    <div class="tab-pane active fade in" id="filetransfer">
+    [% INCLUDE quick/_form_action_filetransfer.tt %]
+    </div>  
+
+
+    <!-- Command -->
+    <div class="tab-pane fade" id="command">
+    [% INCLUDE quick/_form_action_command.tt %]
+    </div>  
+
+  </div>
+</div>

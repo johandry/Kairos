@@ -1,0 +1,19 @@
+<!-- Schedule -->
+<div class="form-group">
+  <div class="col-md-1"></div>
+  <div class="col-md-3" style="padding-left: 0px;">
+    <div class="input-group">
+      <select name="schedule_id" id="schedule_id" class="selectpicker form-control" data-live-search="true" data-size="5" data-header="Select a Schedule">
+        [% FOREACH sch IN schedules %]
+        <option value="[% sch.id %]" [% IF sch.id == schedule_id %]selected[% END %]>[% sch.description %] ([% sch.name %])</option>
+        [% END %]
+      </select>
+      <span class="input-group-addon"><a href="#new_schedule" data-toggle="tab">New</a></span>
+    </div>
+  </div>
+</div>
+
+<!-- New Schedule -->
+<div id="new_schedule" class="tab-pane fade">
+[% INCLUDE quick/_form_schedule.tt %]
+</div>

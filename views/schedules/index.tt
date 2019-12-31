@@ -1,0 +1,61 @@
+<div class="content">
+    
+    <div class="header">
+        
+        <h1 class="page-title">Schedules</h1>
+    </div>
+    
+    <ul class="breadcrumb">
+        <li><a href="/">Home</a> </li>
+        <li class="active">Schedules</li>
+    </ul>
+
+    <div class="container">
+        <div class="row">
+          [%  INCLUDE _flash.tt %]
+          [% IF role == 'Admin' %]          
+          <div class="btn-toolbar">
+            <div class="btn-group">
+              <a href="[% request.uri_for("/schedules/new")%]" class="btn btn-primary"><i class="fa fa-plus"></i> New Schedule</a>
+            </div>
+            <div class="btn-group">
+              <button class="btn btn-default"><i class="fa fa-cloud-upload"></i> Import</button>
+              <button class="btn btn-default"><i class="fa fa-cloud-download"></i> Export</button>
+            </div>
+          </div>
+          [% END %]
+          <div class="well">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th style="width: 26px;"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  [% FOR schedule IN schedules.slice( pager.first - 1, pager.last - 1) %]
+                  <tr>
+                    <td>[% schedule.id %]</td>
+                    <td><a href="schedules/[% schedule.id %]">[% schedule.name %]</a></td>
+                    <td>[% schedule.description %]</td>
+                    <td>
+                      [% IF role == 'Admin' %]
+                        <a href="schedules/[% schedule.id %]/edit"><i class="fa fa-pencil"></i></a>
+                        <a href="#myModal" role="button" data-toggle="modal"><i class="fa fa-remove"></i></a>
+                      [% END %]
+                    </td>
+                  </tr>
+                  [% END %]                
+                </tbody>
+              </table>
+          </div>
+          [% INCLUDE _pagination.tt %]
+          [% INCLUDE _delete_modal.tt action="/schedules/${schedule.id}/delete" %]
+
+          
+                
+        </div>
+    </div>
+</div>

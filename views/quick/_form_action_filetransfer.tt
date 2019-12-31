@@ -1,0 +1,84 @@
+<!-- Protocol -->
+<div class="form-group">
+  <div class="col-md-1" ></div>
+  <div class="col-md-3" style="padding-left: 0px;">
+    <select name="protocol_id" id="protocol_id" class="selectpicker form-control col-md-3" data-live-search="true" data-size="5" data-header="Select a Protocol">
+      [% FOREACH protocol IN protocols %]
+      <option value="[% protocol.id %]" [% IF protocol.id == filetransfer.protocol_id %]selected[% END %]>[% protocol.name %]</option>
+      [% END %]
+    </select>
+  </div>
+</div>
+
+<div class="form-group">
+  <div class="col-md-1" ></div>
+  <label class="control-label" for="source_credential_machine">Source:</label>
+</div>
+
+<!-- Source -->
+<div class="form-group">
+  <div class="col-md-1" ></div>
+  <div class="col-md-3" style="padding-left: 0px;">
+    <!-- <div class="input-group"> -->
+      <select name="source_credential_id" id="source_credential_id" class="selectpicker form-control" data-live-search="true" data-size="5" data-header="Select a Credential">
+        [% FOREACH credential IN credentials %]
+        <option value="[% credential.id %]" [% IF credential.id == source_credential_id %]selected[% END %]>[% credential.username %]</option>
+        [% END %]
+      </select>
+<!--       <span class="input-group-addon"><a href="/credentials/new">New</a></span>
+    </div> -->
+  </div>
+  <div class="col-md-3" style="padding-left: 0px;">
+    <!-- <div class="input-group"> -->
+      <select name="source_machine_id" id="source_machine_id" class="selectpicker form-control" data-live-search="true" data-size="5" data-header="Select a Machine">
+        [% FOREACH machine IN machines %]
+        <option value="[% machine.id %]" [% IF machine.id == source_machine_id %]selected[% END %]>[% machine.hostname %].[% machine.domainname %] ([% machine.ip %])</option>
+        [% END %]
+      </select>
+<!--       <span class="input-group-addon"><a href="/machines/new">New</a></span>
+    </div> -->
+  </div>
+  <div class="col-md-3" style="padding-left: 0px;">
+    <input type="text" name="source_file_name" id="source_file_name" value="[% source_file.name %]" class="form-control" placeholder="File" data-provide="typeahead" data-items="6" autocomplete="off" data-source='["[% files.0.name %]"[% FOREACH file IN files %][% NEXT IF files.index == 0 %],"[% file.name %]"[% END %] ]'> 
+  </div>
+</div>
+
+<div class="form-group">
+  <div class="col-md-1" ></div>
+  <label class="control-label" for="source_credential_machine">Target:</label>
+</div>
+
+<!-- Target -->
+<div class="form-group">
+  <div class="col-md-1" ></div>
+  <div class="col-md-3" style="padding-left: 0px;">
+    <!-- <div class="input-group"> -->
+      <select name="target_credential_id" id="target_credential_id" class="selectpicker form-control" data-live-search="true" data-size="5" data-header="Select a Credential">
+        [% FOREACH credential IN credentials %]
+        <option value="[% credential.id %]" [% IF credential.id == target_credential_id %]selected[% END %]>[% credential.username %]</option>
+        [% END %]
+      </select>
+<!--       <span class="input-group-addon"><a href="/credentials/new">New</a></span>
+    </div> -->
+  </div>
+  <div class="col-md-3" style="padding-left: 0px;">
+    <!-- <div class="input-group"> -->
+      <select name="target_machine_id" id="target_machine_id" class="selectpicker form-control" data-live-search="true" data-size="5" data-header="Select a Machine">
+        [% FOREACH machine IN machines %]
+        <option value="[% machine.id %]" [% IF machine.id == target_machine_id %]selected[% END %]>[% machine.hostname %].[% machine.domainname %] ([% machine.ip %])</option>
+        [% END %]
+      </select>
+<!--       <span class="input-group-addon"><a href="/machines/new">New</a></span>
+    </div> -->
+  </div>
+  <div class="col-md-3" style="padding-left: 0px;">
+    <input type="text" name="target_file_name" id="target_file_name" value="[% target_file.name %]" class="form-control" placeholder="File" data-provide="typeahead" data-items="6" autocomplete="off" data-source='["[% files.0.name %]"[% FOREACH file IN files %][% NEXT IF files.index == 0 %],"[% file.name %]"[% END %] ]'>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('#source_file_name').change( function() {
+    $('#target_file_name').val($('#source_file_name').val().replace(/\/\*$/, ""))
+    $('#filewatcher_file_name').val($('#source_file_name').val())
+  })
+</script>
